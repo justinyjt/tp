@@ -18,7 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CompanyList;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.NameContainsKeywordsPredicate;
+import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
@@ -82,7 +82,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -93,11 +93,11 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
+     * {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -108,9 +108,10 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered company list and selected company in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
-        // we are unable to defensively copy the model for comparison later, so we can
-        // only do so by copying its components.
+    public static void assertCommandFailure(Command command, Model actualModel,
+                                            String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can only do so by copying its
+        // components.
         CompanyList expectedCompanyList = new CompanyList(actualModel.getCompanyList());
         List<Company> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCompanyList());
 
@@ -118,6 +119,7 @@ public class CommandTestUtil {
         assertEquals(expectedCompanyList, actualModel.getCompanyList());
         assertEquals(expectedFilteredList, actualModel.getFilteredCompanyList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -127,7 +129,7 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }

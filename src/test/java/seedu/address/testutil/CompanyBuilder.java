@@ -7,8 +7,8 @@ import java.util.Set;
 
 import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
-import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
@@ -24,7 +24,7 @@ public class CompanyBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private Name name;
+    private CompanyName name;
     private Phone phone;
     private Email email;
     private Address address;
@@ -35,7 +35,7 @@ public class CompanyBuilder {
      * Creates a {@code CompanyBuilder} with the default details.
      */
     public CompanyBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new CompanyName(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -59,20 +59,20 @@ public class CompanyBuilder {
      * Sets the {@code Name} of the {@code Company} that we are building.
      */
     public CompanyBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new CompanyName(name);
         return this;
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Company} that we are building.
      */
-    public CompanyBuilder withTags(String ... tags) {
+    public CompanyBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company} that we are building.
+     * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company}  that we are building.
      */
     public CompanyBuilder withRoles(Role... roles) {
         this.roles = SampleDataUtil.getRoleList(roles);
@@ -88,7 +88,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Company} that we are building to an empty {@code Address}.
+     * Sets the {@code Address} of the {@code Company} that we are building to an empty {@code  Address}.
      */
     public CompanyBuilder withoutAddress() {
         this.address = new Address("");

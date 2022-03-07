@@ -22,8 +22,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
-import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
@@ -35,7 +35,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the company identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the company"
+            + " identified "
             + "by the index number used in the displayed company list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -50,13 +51,14 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the "
+            + "address book.";
 
     private final Index index;
     private final EditCompanyDescriptor editCompanyDescriptor;
 
     /**
-     * @param index of the company in the filtered company list to edit
+     * @param index                 of the company in the filtered company list to edit
      * @param editCompanyDescriptor details to edit the company with
      */
     public EditCommand(Index index, EditCompanyDescriptor editCompanyDescriptor) {
@@ -92,17 +94,20 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Company} with the details of {@code companyToEdit}
      * edited with {@code editCompanyDescriptor}.
      */
-    private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
+    private static Company createEditedCompany(Company companyToEdit,
+                                               EditCompanyDescriptor editCompanyDescriptor) {
         assert companyToEdit != null;
 
-        Name updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getName());
+        CompanyName updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getName());
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
-        Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
+        Address updatedAddress =
+                editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
         ArrayList<Role> roles = new ArrayList<>(); // Dummy placeholder, will update in v1.2b
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, roles);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                roles);
     }
 
     @Override
@@ -128,13 +133,14 @@ public class EditCommand extends Command {
      * corresponding field value of the company.
      */
     public static class EditCompanyDescriptor {
-        private Name name;
+        private CompanyName name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditCompanyDescriptor() {}
+        public EditCompanyDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -155,11 +161,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(CompanyName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<CompanyName> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -201,7 +207,9 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null)
+                    ? Optional.of(Collections.unmodifiableSet(tags))
+                    : Optional.empty();
         }
 
         @Override

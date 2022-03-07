@@ -8,8 +8,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
-import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -44,7 +44,7 @@ public class EditCompanyDescriptorBuilder {
      * Sets the {@code Name} of the {@code EditCompanyDescriptor} that we are building.
      */
     public EditCompanyDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setName(new CompanyName(name));
         return this;
     }
 
@@ -73,8 +73,8 @@ public class EditCompanyDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCompanyDescriptor}
-     * that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCompanyDescriptor} that we are
+     * building.
      */
     public EditCompanyDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());

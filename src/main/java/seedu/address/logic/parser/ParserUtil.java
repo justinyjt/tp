@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
-import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -24,8 +24,10 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -39,8 +41,10 @@ public class ParserUtil {
     /**
      * Parses two {@code oneBasedIndex} into an array of {@code Index} of length two and returns it.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if one of the specified indexes is invalid (not non-zero unsigned integer)
-     * or one or both indexes are missing.
+     *
+     * @throws ParseException if one of the specified indexes is invalid (not non-zero unsigned
+     *                        integer)
+     *                        or one or both indexes are missing.
      */
     public static Index[] parseDoubleIndex(String oneBasedIndexes) throws ParseException {
         String[] splitTrimmedIndexes = oneBasedIndexes.trim().split("\\s+");
@@ -59,13 +63,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static CompanyName parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!CompanyName.isValidName(trimmedName)) {
+            throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new CompanyName(trimmedName);
     }
 
     /**

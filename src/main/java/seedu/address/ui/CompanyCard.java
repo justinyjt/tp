@@ -1,14 +1,14 @@
 package seedu.address.ui;
 
-import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.company.Company;
 import seedu.address.model.role.Role;
 
@@ -17,7 +17,7 @@ import seedu.address.model.role.Role;
  */
 public class CompanyCard extends UiPart<Region> {
 
-    private static final String FXML = "CompanyListCard.fxml";
+    private static final String FXML = "CompanyCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -28,6 +28,8 @@ public class CompanyCard extends UiPart<Region> {
      */
 
     public final Company company;
+    public final ObservableList<Role> roleList;
+    public final RoleListPanel roleListPanel;
 
     @FXML
     private HBox cardPane;
@@ -46,7 +48,7 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private ListView<Role> rolesListView;
     @FXML
-    private ObservableList<Role> rolesList;
+    private StackPane roleListPanelPlaceholder;
 
     /**
      * Creates a {@code CompanyCard} with the given {@code Company} and index to display.
@@ -74,33 +76,27 @@ public class CompanyCard extends UiPart<Region> {
         if (emailField == "") {
             email.setManaged(false);
         }
+        setRoleTags();
+        roleList = company.getRoleManager().getRoles();
+        roleListPanel = new RoleListPanel(roleList);
+        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
 
-        rolesList = FXCollections.observableArrayList(company.getRoleManager().getRoles());
-        rolesListView.setItems(rolesList);
-        rolesListView.setCellFactory(listView -> new RoleListViewCell());
-
-        if (rolesList.isEmpty()) {
-            rolesListView.setManaged(false);
-        }
-
-        company.getRoleManager().getSetRoles().stream()
-                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+        roleList.addListener((ListChangeListener<Role>) change -> {
+            roleTags.getChildren().clear();
+            setRoleTags();
+            if (roleList.isEmpty()) {
+                roleListPanelPlaceholder.getChildren().clear();
+            }
+        });
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Role} using a {@code RoleCard}.
+     * Populate <code>roleTags</code> with names of roles tagged to the company represented by this
+     * <code>CompanyCard</code>
      */
-    class RoleListViewCell extends ListCell<Role> {
-        @Override
-        protected void updateItem(Role role, boolean empty) {
-            super.updateItem(role, empty);
-            if (empty || role == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new RoleCard(role).getRoot());
-            }
-        }
+    public void setRoleTags() {
+        company.getRoleManager().getSetRoles().stream()
+                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
     }
 
     @Override

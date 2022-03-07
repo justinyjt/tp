@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 public class Company {
 
     // Identity fields
-    private final Name name;
+    private final CompanyName companyName;
     private final Phone phone;
     private final Email email;
 
@@ -31,9 +31,10 @@ public class Company {
     /**
      * Name is compulsory but Phone, Email and Address are optional
      */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Role> roles) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
+    public Company(CompanyName companyName, Phone phone, Email email, Address address,
+                   Set<Tag> tags, List<Role> roles) {
+        requireAllNonNull(companyName, phone, email, address, tags);
+        this.companyName = companyName;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -41,8 +42,8 @@ public class Company {
         this.roleManager.getRoles().addAll(roles);
     }
 
-    public Name getName() {
-        return name;
+    public CompanyName getName() {
+        return companyName;
     }
 
     public Phone getPhone() {
@@ -107,7 +108,7 @@ public class Company {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(companyName, phone, email, address, tags);
     }
 
     @Override

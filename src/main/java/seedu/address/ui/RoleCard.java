@@ -20,6 +20,8 @@ public class RoleCard extends UiPart<Region> {
     @FXML
     private Label roleName;
     @FXML
+    private Label id;
+    @FXML
     private Label status;
     @FXML
     private Label deadline;
@@ -31,14 +33,15 @@ public class RoleCard extends UiPart<Region> {
     /**
      * Creates a {@code RoleCard} with the given {@code Role}.
      */
-    public RoleCard(Role role) {
+    public RoleCard(Role role, int displayedIndex) {
         super(FXML);
         this.role = role;
+        id.setText(displayedIndex + ". ");
         roleName.setText(role.getName().fullName);
-        status.setText(role.getStatus().value);
-        deadline.setText(role.getDeadline().toString());
-        description.setText(role.getDescription().value);
-        stipend.setText(role.getStipend().value);
+        status.setText("Status: " + role.getStatus().value);
+        deadline.setText("Deadline: " + role.getDeadline().toString());
+        description.setText("Description: " + role.getDescription().value);
+        stipend.setText("Stipend: $" + role.getStipend().value);
     }
 
     @Override

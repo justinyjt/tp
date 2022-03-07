@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.company.NameContainsKeywordsPredicate;
+import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -90,12 +90,14 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredCompanyList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCompanyList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredCompanyList().remove(0));
     }
 
     @Test
     public void equals() {
-        CompanyList companyList = new AddressBookBuilder().withCompany(ALICE).withCompany(BENSON).build();
+        CompanyList companyList =
+                new AddressBookBuilder().withCompany(ALICE).withCompany(BENSON).build();
         CompanyList differentCompanyList = new CompanyList();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,7 +120,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
