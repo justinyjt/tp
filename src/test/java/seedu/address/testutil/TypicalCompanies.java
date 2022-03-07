@@ -47,7 +47,7 @@ public class TypicalCompanies {
             .withRoles(MOBILE_ENGINEER, NETWORK_ENGINEER)
             .build();
     public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("9482224")
-            .withEmail("pear@example.com").withAddress("michegan ave")
+            .withEmail("pear@example.com").withAddress("micheegan ave")
             .withRoles(ML_ENGINEER)
             .build();
     public static final Company GOVTECH = new CompanyBuilder().withName("Gov tech").withPhone("9482427")

@@ -68,7 +68,7 @@
     "name" : "Apple",
     "phone" : "9482224",
     "email" : "pear@example.com",
-    "address" : "michegan ave",
+    "address" : "micheegan ave",
     "tagged" : [ ],
     "roles" : [ {
       "name" : "ML ENGINEER",
