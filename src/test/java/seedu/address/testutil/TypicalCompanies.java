@@ -36,7 +36,7 @@ public class TypicalCompanies {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
-            // .withRoles(MOBILE_ENGINEER)
+            .withRoles(MOBILE_ENGINEER)
             .build();
     public static final Company CARL = new CompanyBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")

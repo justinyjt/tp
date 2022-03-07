@@ -45,37 +45,12 @@ public class JsonAdaptedRole {
      * Converts a given {@code Role} into this class for Jackson use.
      */
     public JsonAdaptedRole(Role source) {
-        name = source.getName().fullName;
-        status = source.getStatus().value;
+        name = source.getName().toString();
+        status = source.getStatus().toString();
         deadline = source.getDeadline().value.format(VALIDATION_FORMATTER);
-        description = source.getDescription().value;
-        stipend = source.getStipend().value;
+        description = source.getDescription().toString();
+        stipend = source.getStipend().toString();
     }
-
-    //    @JsonValue
-    //    public String getRoleName() {
-    //        return name;
-    //    }
-    //
-    //    @JsonValue
-    //    public String getRoleStatus() {
-    //        return status;
-    //    }
-    //
-    //    @JsonValue
-    //    public String getRoleDeadline() {
-    //        return deadline;
-    //    }
-    //
-    //    @JsonValue
-    //    public String getRoleDescription() {
-    //        return description;
-    //    }
-    //
-    //    @JsonValue
-    //    public String getRoleStipend() {
-    //        return stipend;
-    //    }
 
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Role} object.
@@ -111,19 +86,11 @@ public class JsonAdaptedRole {
         }
         final Deadline roleDeadline = new Deadline(deadline);
 
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Description.class.getSimpleName()));
-        }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description roleDescription = new Description(description);
 
-        if (stipend == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Stipend.class.getSimpleName()));
-        }
         if (!Stipend.isValidStipend(stipend)) {
             throw new IllegalValueException(Stipend.MESSAGE_CONSTRAINTS);
         }

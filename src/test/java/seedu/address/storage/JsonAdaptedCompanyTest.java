@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedCompany.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedRoleTest.INVALID_ROLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCompanies.BENSON;
 
@@ -31,7 +32,9 @@ public class JsonAdaptedCompanyTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedRole> VALID_ROLES = new ArrayList<>(); // Dummy placeholder, update in v1.2b
+    private static final List<JsonAdaptedRole> VALID_ROLES = BENSON.getRoleManager().getRoles().stream()
+            .map(JsonAdaptedRole::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validCompanyDetails_returnsCompany() throws Exception {
@@ -109,6 +112,15 @@ public class JsonAdaptedCompanyTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedCompany company =
                 new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_ROLES);
+        assertThrows(IllegalValueException.class, company::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidRoles_throwsIllegalValueException() {
+        List<JsonAdaptedRole> invalidRoles = new ArrayList<>();
+        invalidRoles.add(INVALID_ROLE);
+        JsonAdaptedCompany company =
+                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, invalidRoles);
         assertThrows(IllegalValueException.class, company::toModelType);
     }
 
