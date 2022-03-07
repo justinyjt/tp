@@ -1,13 +1,13 @@
 package seedu.address.model.role;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the list of all roles tagged to a Company found in the address book.
