@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCompanies.ALICE;
-import static seedu.address.testutil.TypicalCompanies.HOON;
-import static seedu.address.testutil.TypicalCompanies.IDA;
+import static seedu.address.testutil.TypicalCompanies.ASANA;
+import static seedu.address.testutil.TypicalCompanies.GOOGLE;
+import static seedu.address.testutil.TypicalCompanies.META;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -72,14 +72,14 @@ public class JsonCompanyListStorageTest {
         assertEquals(original, new CompanyList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addCompany(HOON);
-        original.removeCompany(ALICE);
+        original.addCompany(ASANA);
+        original.removeCompany(META);
         jsonCompanyListStorage.saveCompanyList(original, filePath);
         readBack = jsonCompanyListStorage.readCompanyList(filePath).get();
         assertEquals(original, new CompanyList(readBack));
 
         // Save and read without specifying file path
-        original.addCompany(IDA);
+        original.addCompany(GOOGLE);
         jsonCompanyListStorage.saveCompanyList(original); // file path not specified
         readBack = jsonCompanyListStorage.readCompanyList().get(); // file path not specified
         assertEquals(original, new CompanyList(readBack));

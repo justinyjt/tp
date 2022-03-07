@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalCompanies.CARL;
-import static seedu.address.testutil.TypicalCompanies.ELLE;
-import static seedu.address.testutil.TypicalCompanies.FIONA;
+import static seedu.address.testutil.TypicalCompanies.APPLE;
+import static seedu.address.testutil.TypicalCompanies.GOVTECH;
+import static seedu.address.testutil.TypicalCompanies.ZOOM;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -67,11 +67,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
-        CompanyNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        CompanyNameContainsKeywordsPredicate predicate = preparePredicate("zoom apple tech");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredCompanyList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCompanyList());
+        assertEquals(Arrays.asList(ZOOM, APPLE, GOVTECH), model.getFilteredCompanyList());
     }
 
     /**

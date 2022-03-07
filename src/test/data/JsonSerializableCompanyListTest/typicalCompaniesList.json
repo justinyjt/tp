@@ -1,46 +1,107 @@
 {
   "_comment": "AddressBook save file which contains the same Company values as in TypicalCompanies#getTypicalAddressBook()",
   "companies" : [ {
-    "name" : "Alice Pauline",
+    "name" : "Meta",
     "phone" : "94351253",
-    "email" : "alice@example.com",
+    "email" : "meta@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "roles" : [ {
+      "name" : "ML ENGINEER",
+      "status" : "pending",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do ML",
+      "stipend" : "1000"
+    }, {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "Benson Meier",
+    "name" : "Amazon",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
+    "email" : "amazon@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "roles" : [ {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "Zoom",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
+    "email" : "zooom@example.com",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "Daniel Meier",
+    "name" : "Tiktok",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
+    "email" : "ticky@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "roles" : [ {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    }, {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "Apple",
     "phone" : "9482224",
-    "email" : "werner@example.com",
+    "email" : "pear@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "roles" : [ {
+      "name" : "ML ENGINEER",
+      "status" : "pending",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do ML",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "Gov tech",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
+    "email" : "techygov@example.com",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
   }, {
-    "name" : "George Best",
+    "name" : "Slack",
     "phone" : "9482442",
-    "email" : "anna@example.com",
+    "email" : "slacker@example.com",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "deadline" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
   } ]
 }

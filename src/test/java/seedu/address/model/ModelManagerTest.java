@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCompanies.ALICE;
-import static seedu.address.testutil.TypicalCompanies.BENSON;
+import static seedu.address.testutil.TypicalCompanies.AMAZON;
+import static seedu.address.testutil.TypicalCompanies.META;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasCompany_companyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasCompany(ALICE));
+        assertFalse(modelManager.hasCompany(META));
     }
 
     @Test
     public void hasCompany_companyInAddressBook_returnsTrue() {
-        modelManager.addCompany(ALICE);
-        assertTrue(modelManager.hasCompany(ALICE));
+        modelManager.addCompany(META);
+        assertTrue(modelManager.hasCompany(META));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         CompanyList companyList =
-                new AddressBookBuilder().withCompany(ALICE).withCompany(BENSON).build();
+                new AddressBookBuilder().withCompany(META).withCompany(AMAZON).build();
         CompanyList differentCompanyList = new CompanyList();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -119,7 +119,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentCompanyList, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = META.getName().fullName.split("\\s+");
         modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs)));
 

@@ -3,12 +3,12 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_INSTAGRAM;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_INSTAGRAM;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_INSTAGRAM;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_INSTAGRAM;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCompanies.AMY;
+import static seedu.address.testutil.TypicalCompanies.INSTAGRAM;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -79,9 +79,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCompanyCommand = AddCompanyCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Company expectedCompany = new CompanyBuilder(AMY).withTags().withRoles().build();
+        String addCompanyCommand = AddCompanyCommand.COMMAND_WORD + NAME_DESC_INSTAGRAM
+                + PHONE_DESC_INSTAGRAM + EMAIL_DESC_INSTAGRAM + ADDRESS_DESC_INSTAGRAM;
+        Company expectedCompany = new CompanyBuilder(INSTAGRAM).withTags().withRoles().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedCompany);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
