@@ -10,7 +10,6 @@ import static seedu.tinner.testutil.TypicalIndexes.INDEX_FIRST_ROLE;
 import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
-
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.logic.parser.exceptions.ParseException;
 import seedu.tinner.model.company.Address;
