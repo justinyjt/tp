@@ -51,7 +51,7 @@ public class CompanyListParser {
             return new AddCompanyCommandParser().parse(arguments);
 
         case EditCompanyCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCompanyCommandParser().parse(arguments);
 
         case DeleteCompanyCommand.COMMAND_WORD:
             return new DeleteCompanyCommandParser().parse(arguments);

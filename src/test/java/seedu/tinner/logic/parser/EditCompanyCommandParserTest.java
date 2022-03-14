@@ -38,7 +38,7 @@ public class EditCompanyCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCompanyCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditCompanyCommandParser parser = new EditCompanyCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
