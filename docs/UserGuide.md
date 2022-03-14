@@ -15,6 +15,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * [Adding a role: `addRole`](#c-add-c-r)
 * [Deleting a company: `deleteCompany`](#c-delete-c)
 * [Deleting a role: `deleteRole`](#c-delete-c-r)
+* [Finding a specific company or role: `find`](#c-find-c-r)
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -130,6 +131,27 @@ Examples:
 
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
   company in Tinner.
+  
+### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
+
+Find companies whose names match any of the given company keywords and contain one or more roles matching any of the given role keywords.
+
+Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `meta` will match `Meta`.
+* The order of the keywords does not matter. e.g. `software engineer` will match `engineer software`.
+* Only the company name, and the role name are searched.
+* Only full words would be matched e.g. `mobile` will not match `mobiles`
+* Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
+* At least one role keyword or one company keyword must be provided in the user input. 
+* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
+* If both keywords are entered, only companies with names that match any of the company keywords, containing roles whose names match any of the role keywords are displayed.
+* If no role keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
+* If no company keywords are entered, roles whose role names match role keywords, belonging to all companies, are displayed. 
+
+Examples:
+
+* `find c/meta amazon r/engineer` 
 
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
@@ -156,5 +178,6 @@ Action | Format, Examples
 **Add role** | `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` addRole 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
 **Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
 **Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
+**Find company or role** | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`
 **Help** | `help`
 **Exit Tinner** | `exit`

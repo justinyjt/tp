@@ -1,5 +1,6 @@
 package seedu.tinner.logic.parser;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.tinner.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tinner.testutil.Assert.assertThrows;
@@ -7,6 +8,8 @@ import static seedu.tinner.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.tinner.testutil.TypicalIndexes.INDEX_FIRST_ROLE;
 
 import org.junit.jupiter.api.Test;
+
+import javafx.util.Pair;
 
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.logic.parser.exceptions.ParseException;
@@ -16,6 +19,7 @@ import seedu.tinner.model.company.Email;
 import seedu.tinner.model.company.Phone;
 
 public class ParserUtilTest {
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -66,6 +70,64 @@ public class ParserUtilTest {
         Index[] indexesWhiteSpaceInput = ParserUtil.parseDoubleIndex("  1     1  ");
         assertEquals(INDEX_FIRST_COMPANY, indexesWhiteSpaceInput[0]);
         assertEquals(INDEX_FIRST_ROLE, indexesWhiteSpaceInput[1]);
+    }
+
+    @Test
+    public void parseIndexWithContent_invalidInput_throwsParseException() {
+        // No content
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexWithContent("1"));
+
+        // No separation
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexWithContent("2test"));
+
+        // Negative integer for index
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexWithContent("-5 test"));
+
+        // Index not integer
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexWithContent("a test"));
+    }
+
+    @Test
+    public void parseIndexWithContent_validInput_success() throws Exception {
+        // No whitespaces
+        Pair<Index, String> parsedInput = ParserUtil.parseIndexWithContent("1 test");
+        Index index = parsedInput.getKey();
+        String content = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, index);
+        assertEquals(content, " test");
+
+        // Leading and trailing whitespaces
+        Pair<Index, String> whiteSpaceInput = ParserUtil.parseIndexWithContent("  1      test");
+        index = parsedInput.getKey();
+        content = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, index);
+        assertEquals(content, " test");
+    }
+
+    @Test
+    public void parseDoubleIndexWithContent_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndexWithContent("1 0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("1 1 1"));
+    }
+
+    @Test
+    public void parseDoubleIndexWithContent_validInput_success() throws Exception {
+        // No whitespaces
+        Pair<Index[], String> parsedInput = ParserUtil.parseDoubleIndexWithContent("1 1 test");
+        Index[] indexes = parsedInput.getKey();
+        String info = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, indexes[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexes[1]);
+        assertEquals(info, " test");
+
+        // Leading and trailing whitespaces
+        Pair<Index[], String> whiteSpaceInput = ParserUtil.parseDoubleIndexWithContent("  1     1   test");
+        indexes = parsedInput.getKey();
+        info = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, indexes[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexes[1]);
+        assertEquals(info, " test");
     }
 
     @Test

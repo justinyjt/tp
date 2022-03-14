@@ -44,16 +44,25 @@ public class EditRoleCommandParser implements Parser<EditRoleCommand> {
                         PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
 
         EditRoleCommand.EditRoleDescriptor editRoleDescriptor = new EditRoleCommand.EditRoleDescriptor();
-
-        editRoleDescriptor.setName(ParserUtil.parseRoleName(argMultimap.getOptionalValue(PREFIX_NAME).get()));
-        editRoleDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getOptionalValue(PREFIX_STATUS).get()));
-        editRoleDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getOptionalValue(PREFIX_DEADLINE).get()));
-        editRoleDescriptor.setDescription(ParserUtil.parseDescription(
-                argMultimap.getOptionalValue(PREFIX_DESCRIPTION).get()));
-        editRoleDescriptor.setStipend(ParserUtil.parseStipend(argMultimap.getOptionalValue(PREFIX_STIPEND).get()));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editRoleDescriptor.setName(ParserUtil.parseRoleName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            editRoleDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
+            editRoleDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editRoleDescriptor.setDescription(ParserUtil.parseDescription(
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_STIPEND).isPresent()) {
+            editRoleDescriptor.setStipend(ParserUtil.parseStipend(argMultimap.getValue(PREFIX_STIPEND).get()));
+        }
 
         if (!editRoleDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditRoleCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditRoleCommand.MESSAGE_USAGE));
         }
 
         return new EditRoleCommand(companyIndex, roleIndex, editRoleDescriptor);
