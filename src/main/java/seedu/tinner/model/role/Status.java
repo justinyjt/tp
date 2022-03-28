@@ -38,6 +38,15 @@ public class Status {
         return Arrays.asList(VALIDATION_ARRAY).contains(test);
     }
 
+    /**
+     * Returns true if the status is active, i.e. not pending, rejected or complete.
+     *
+     * @return true if status is active.
+     */
+    public boolean isActiveStatus() {
+        return !this.value.equals("pending") && !this.value.equals("rejected") && !this.value.equals("complete");
+    }
+
     @Override
     public String toString() {
         return value;

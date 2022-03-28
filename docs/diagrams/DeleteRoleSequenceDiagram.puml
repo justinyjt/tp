@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CompanyListParser" as CompanyListParser LOGIC_COLOR
+participant ":DeleteRoleCommandParser" as DeleteRoleCommandParser LOGIC_COLOR
+participant ":DeleteRoleCommand" as DeleteRoleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteRole 1 1")
+activate LogicManager
+
+LogicManager -> CompanyListParser : parseCommand("deleteRole 1 1")
+activate CompanyListParser
+
+create DeleteRoleCommandParser
+CompanyListParser -> DeleteRoleCommandParser
+activate DeleteRoleCommandParser
+
+DeleteRoleCommandParser --> CompanyListParser
+deactivate DeleteRoleCommandParser
+
+CompanyListParser -> DeleteRoleCommandParser : parse("1 1")
+activate DeleteRoleCommandParser
+
+create DeleteRoleCommand
+DeleteRoleCommandParser -> DeleteRoleCommand : DeleteRoleCommand(1, 1)
+activate DeleteRoleCommand
+
+DeleteRoleCommand --> DeleteRoleCommandParser
+deactivate DeleteRoleCommand
+
+DeleteRoleCommandParser --> CompanyListParser
+deactivate DeleteRoleCommandParser
+
+CompanyListParser --> LogicManager
+deactivate CompanyListParser
+
+LogicManager -> DeleteRoleCommand : execute(model)
+activate DeleteRoleCommand
+
+DeleteRoleCommand -> Model : deleteRole(1, 1)
+activate Model
+
+Model --> DeleteRoleCommand
+deactivate Model
+
+create CommandResult
+DeleteRoleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteRoleCommand
+deactivate CommandResult
+
+DeleteRoleCommand --> LogicManager : result
+deactivate DeleteRoleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@endum

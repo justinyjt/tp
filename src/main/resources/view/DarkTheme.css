@@ -113,9 +113,29 @@
     -fx-background-color: transparent;
 }
 
+#reminderDateListView .list-cell {
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: transparent;
+}
+
+#reminderListView .list-cell {
+    -fx-padding: 10 0 0 0;
+    -fx-background-color: transparent;
+}
+
 #roleListView .list-cell {
     -fx-padding: 0 0 0 0;
     -fx-background-color: transparent;
+}
+
+.list-cell:filled #reminderDateCardPane {
+    -fx-background-color: #37393e;
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled #reminderCardPane {
+    -fx-background-color: #37393e;
+    -fx-background-radius: 10;
 }
 
 .list-cell:filled #companyCardPane {
@@ -144,8 +164,24 @@
     -fx-text-fill: white;
 }
 
+#reminderDateListPanel .label {
+    -fx-text-fill: white;
+}
+
+.cell_giant_label {
+    -fx-font-family: "Rubik Bold";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
 .cell_big_label {
     -fx-font-family: "Rubik Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #010504;
+}
+
+.cell_date_label {
+    -fx-font-family: "Rubik";
     -fx-font-size: 18px;
     -fx-text-fill: #010504;
 }
@@ -377,6 +413,7 @@
     -fx-padding: 1 10 1 10;
     -fx-background-radius: 20;
     -fx-font-size: 10;
+    -fx-font-weight: bold;
 }
 
 .roles_list .list-view {

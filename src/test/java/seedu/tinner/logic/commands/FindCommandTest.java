@@ -19,14 +19,17 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.RoleNameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private Model model =
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
+    private Model expectedModel =
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
 
     @Test
     public void equals() {

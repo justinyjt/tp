@@ -2,15 +2,14 @@
 layout: page
 title: User Guide
 ---
-
-Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Our value proposition is simple: 
-
-    Tinner allows you to
-        1. Track (your internship applications)
-        2. Remind (you of the application's significant dates)
-        3. Review (your past applications to learn from mistakes)
-
+Tinner (Anagram of Intern) is a desktop app for managing internship applications for students, optimized for use via a Command Line Interface (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
+
+Tinner aims to solve the hassle of managing internship applications though 3 aspects.
+1. **Tracks** essential information such as statuses and deadlines at a glance.
+2. **Reminds** important deadlines so that you will not miss a about your application.
+3. **Reviews** the process and take down notes so that you can ace your next application.
 
 ## Table of Contents
 
@@ -22,11 +21,11 @@ If you can type fast, Tinner allows you to easily sort through and retrieve rele
 * [Adding a company: `addCompany`](#c-add-c)
 * [Adding a role: `addRole`](#c-add-c-r)
 * [Deleting a company: `deleteCompany`](#c-delete-c)
-* [Deleting a role: `deleteRole`](#c-delete-c-r)
+  * [Deleting a role: `deleteRole`](#c-delete-c-r)
 * [Editing a company: `editCompany`](#c-edit-c)
 * [Editing a role: `editRole`](#c-edit-r)
 * [Finding a specific company or role: `find`](#c-find-c-r)
-* [Favouriting a specific company: `favourite`](#c-favourite-c)  
+* [Favouriting a specific company: `favourite`](#c-favourite-c)
 * [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
 * [Changing the reminder window: `setWindow`](#c-setWindow-c)
 * [Command summary](#command-summary)
@@ -55,7 +54,6 @@ If you can type fast, Tinner allows you to easily sort through and retrieve rele
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features <a id="features"></a>
@@ -127,6 +125,8 @@ Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCR
     * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
     * The `STIPEND` must be a positive integer going up to 10 digits long.
 
+Note: Integer is a number which is not a fraction; a whole number.
+
 Examples:
 
 * `addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse data $/4800 `
@@ -183,7 +183,7 @@ Examples:
 Examples:
 
 * `editRole 1 1 [s/offered] [$/3000]`
-  
+
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
 * Find companies or/and roles depending on the format given.
@@ -198,12 +198,12 @@ Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROL
 * Only the company name, and the role name are searched.
 * Only full words would be matched e.g. `mobile` will not match `mobiles`
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
-* At least one role keyword or one company keyword must be provided in the user input. 
-* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
+* At least one role keyword or one company keyword must be provided in the user input.
+* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered
 
 Examples:
 
-* `find c/meta amazon r/engineer` 
+* `find c/meta amazon r/engineer`
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
 
@@ -246,10 +246,20 @@ Format: `setWindow REMINDER_WINDOW`
 Examples:
 
 * `setWindow 14` would make Tinner remind you of an upcoming reminder two weeks prior to the associated role's reminder date.
-  
+
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
 Exits the program.
+
+### Colour code of role tags
+Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
+![img.png](images/tagcolourcode.png)
+* "applying" : white
+* "pending": orange
+* "interview and assessments": purple
+* "rejected": red
+* "offered": green
+* "complete": black
 
 Format: `exit`
 

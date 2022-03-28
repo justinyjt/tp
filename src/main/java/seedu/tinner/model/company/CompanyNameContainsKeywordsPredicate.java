@@ -14,12 +14,12 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     private final List<String> companyNameKeywords;
 
     /**
-     * @param roleNameKeywords List of strings representing role name keywords entered by user input
+     * @param roleNameKeywords    List of strings representing role name keywords entered by user input
      * @param companyNameKeywords List of strings representing company name keywords entered by user input
      */
     public CompanyNameContainsKeywordsPredicate(List<String> roleNameKeywords, List<String> companyNameKeywords) {
-        assert(!roleNameKeywords.contains(""));
-        assert(!companyNameKeywords.contains(""));
+        assert (!roleNameKeywords.contains(""));
+        assert (!companyNameKeywords.contains(""));
         this.roleNameKeywords = roleNameKeywords;
         this.companyNameKeywords = companyNameKeywords;
     }
@@ -27,6 +27,7 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     /**
      * Returns true when the {@code Company} contains a {@code Role} witth
      * name that matches one of the Strings in {@code roleNameKeywords}
+     *
      * @param company {@code Company} to be evaluated
      * @return
      */
@@ -34,17 +35,18 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
         List<Role> roles = company.getRoleManager().getRoleList().getRoles();
 
         return roleNameKeywords.stream().anyMatch(keyword -> roles.stream()
-                .anyMatch(role -> StringUtil.containsWordIgnoreCase(role.getName().fullName, keyword)));
+                .anyMatch(role -> StringUtil.containsWordIgnoreCase(role.getName().value, keyword)));
     }
 
     /**
      * Returns true when the {@code Company} name matches one of the Strings in {@code companyNameKeywords}
+     *
      * @param company {@code Company} to be evaluated
      * @return
      */
     public boolean hasCompanyNameKeywords(Company company) {
         return companyNameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().value, keyword));
     }
 
     @Override

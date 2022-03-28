@@ -10,7 +10,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**:
     * https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=kerbysoh&breakdown=true
-  
+
 * **New features**:
     * To be added soon
 
@@ -19,7 +19,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * To be added soon
-    
+
 * **Documentation**:
     * To be added soon
 

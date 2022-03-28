@@ -23,12 +23,14 @@ import seedu.tinner.model.CompanyList;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.testutil.EditRoleDescriptorBuilder;
 import seedu.tinner.testutil.RoleBuilder;
 
 public class EditRoleCommandTest {
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
+    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test
     public void execute_allFieldsSpecified_success() {
@@ -38,7 +40,7 @@ public class EditRoleCommandTest {
                 descriptor);
         String expectedMessage = String.format(EditRoleCommand.MESSAGE_EDIT_ROLE_SUCCESS, editedRole);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
         List<Role> expectedRoleList = expectedModel.getFilteredRoleList(INDEX_FIRST_COMPANY);
         Role expectedRole = expectedRoleList.get(INDEX_FIRST_ROLE.getZeroBased());
         expectedModel.setRole(INDEX_FIRST_COMPANY, expectedRole, editedRole);
@@ -64,7 +66,7 @@ public class EditRoleCommandTest {
 
         String expectedMessage = String.format(EditRoleCommand.MESSAGE_EDIT_ROLE_SUCCESS, editedRole);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
         expectedModel.setRole(indexLastCompany, lastRole, editedRole);
 
         assertCommandSuccess(editRoleCommand, model, expectedMessage, expectedModel);
@@ -79,7 +81,7 @@ public class EditRoleCommandTest {
 
         String expectedMessage = String.format(EditRoleCommand.MESSAGE_EDIT_ROLE_SUCCESS, editedRole);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
 
         assertCommandSuccess(editRoleCommand, model, expectedMessage, expectedModel);
     }

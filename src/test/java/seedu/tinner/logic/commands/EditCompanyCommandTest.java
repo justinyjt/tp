@@ -23,6 +23,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.testutil.CompanyBuilder;
 import seedu.tinner.testutil.EditCompanyDescriptorBuilder;
 
@@ -30,8 +31,8 @@ import seedu.tinner.testutil.EditCompanyDescriptorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCompanyCommandTest {
-
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
+    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -41,7 +42,7 @@ public class EditCompanyCommandTest {
 
         String expectedMessage = String.format(EditCompanyCommand.MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
         expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -61,7 +62,7 @@ public class EditCompanyCommandTest {
 
         String expectedMessage = String.format(EditCompanyCommand.MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
         expectedModel.setCompany(lastCompany, editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -75,7 +76,7 @@ public class EditCompanyCommandTest {
 
         String expectedMessage = String.format(EditCompanyCommand.MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -91,7 +92,7 @@ public class EditCompanyCommandTest {
 
         String expectedMessage = String.format(EditCompanyCommand.MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany);
 
-        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CompanyList(model.getCompanyList()), new UserPrefs(), reminderList);
         expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

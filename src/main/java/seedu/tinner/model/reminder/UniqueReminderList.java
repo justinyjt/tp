@@ -2,12 +2,17 @@ package seedu.tinner.model.reminder;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-//import seedu.tinner.model.Reminder.exceptions.DuplicateReminderException;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -22,24 +27,27 @@ import javafx.collections.ObservableList;
  */
 public class UniqueReminderList implements Iterable<Reminder> {
 
-    private static UniqueReminderList reminderList = null;
+    private static UniqueReminderList reminderList;
 
-    public final ObservableList<Reminder> internalList;
+    private final ObservableList<Reminder> internalList;
     private final ObservableList<Reminder> internalUnmodifiableList;
+    private final HashMap<LocalDate, ArrayList<Reminder>> dateToReminderMap;
 
     /**
      * Constructor of UniqueReminderList
      */
-    private UniqueReminderList () {
+    private UniqueReminderList() {
         internalList = FXCollections.observableArrayList();
         internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+        dateToReminderMap = new HashMap<>();
     }
 
     /**
      * Factory method of UniqueReminderList
+     *
      * @return Produced UniqueReminderList object that is a Singleton.
      */
-    public static UniqueReminderList getReminderList() {
+    public static UniqueReminderList getInstance() {
         if (reminderList == null) {
             reminderList = new UniqueReminderList();
         }
@@ -64,6 +72,11 @@ public class UniqueReminderList implements Iterable<Reminder> {
             //throw new DuplicateReminderException(); //need to implement
         }
         internalList.add(toAdd);
+
+        LocalDateTime reminderDateTime = toAdd.getDeadline().value;
+        LocalDate reminderDate = reminderDateTime.toLocalDate();
+        dateToReminderMap.computeIfAbsent(reminderDate, k -> new ArrayList<>());
+        dateToReminderMap.get(reminderDate).add(toAdd);
     }
 
     /**
@@ -73,7 +86,24 @@ public class UniqueReminderList implements Iterable<Reminder> {
         return internalUnmodifiableList;
     }
 
-    @Override
+    public ObservableList<LocalDate> getReminderDates() {
+        return FXCollections.unmodifiableObservableList(FXCollections
+                .observableArrayList(new TreeSet<>(dateToReminderMap.keySet())));
+    }
+
+    public ObservableList<Reminder> getDateSpecificReminders(LocalDate date) {
+        ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
+        ArrayList<Reminder> retrievedReminders = dateToReminderMap.get(date);
+        if (retrievedReminders == null) {
+            return reminderList;
+        }
+        Collections.sort(retrievedReminders);
+        for (Reminder reminder : retrievedReminders) {
+            reminderList.add(reminder);
+        }
+        return reminderList;
+    }
+
     public Iterator<Reminder> iterator() {
         return internalList.iterator();
     }

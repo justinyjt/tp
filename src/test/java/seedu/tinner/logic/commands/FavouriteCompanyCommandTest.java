@@ -18,6 +18,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.testutil.CompanyBuilder;
 
 /**
@@ -26,7 +27,8 @@ import seedu.tinner.testutil.CompanyBuilder;
  */
 public class FavouriteCompanyCommandTest {
 
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
+    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -38,7 +40,7 @@ public class FavouriteCompanyCommandTest {
         String expectedMessage = String.format(FavouriteCompanyCommand.MESSAGE_FAVOURITE_COMPANY_SUCCESS,
                 favouritedCompany);
 
-        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), reminderList);
         expectedModel.setCompany(companyToFavourite, favouritedCompany);
 
         assertCommandSuccess(favouriteCompanyCommand, model, expectedMessage, expectedModel);
@@ -64,7 +66,7 @@ public class FavouriteCompanyCommandTest {
         String expectedMessage = String.format(FavouriteCompanyCommand.MESSAGE_FAVOURITE_COMPANY_SUCCESS,
                 favouritedCompany);
 
-        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), reminderList);
         expectedModel.setCompany(companyToFavourite, favouritedCompany);
 
         assertCommandSuccess(favouriteCompanyCommand, model, expectedMessage, expectedModel);

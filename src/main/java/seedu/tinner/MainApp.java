@@ -21,6 +21,7 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
+//import seedu.tinner.model.reminder.Reminder;
 import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.util.SampleDataUtil;
@@ -79,7 +80,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCompanyList> companyListOptional;
         ReadOnlyCompanyList initialData;
-        UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
+
         try {
             companyListOptional = storage.readCompanyList();
             if (!companyListOptional.isPresent()) {
@@ -93,7 +95,10 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
             initialData = new CompanyList();
         }
-
+        // testing
+        // for (Reminder r : UniqueReminderList.getReminderList().internalList) {
+        //     System.out.println(r.toString());
+        // }
         return new ModelManager(initialData, userPrefs, reminderList);
     }
 

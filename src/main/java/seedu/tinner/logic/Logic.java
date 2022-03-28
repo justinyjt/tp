@@ -7,6 +7,7 @@ import seedu.tinner.commons.core.GuiSettings;
 import seedu.tinner.logic.commands.CommandResult;
 import seedu.tinner.logic.commands.exceptions.CommandException;
 import seedu.tinner.logic.parser.exceptions.ParseException;
+import seedu.tinner.model.Model;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.company.Company;
 
@@ -16,21 +17,24 @@ import seedu.tinner.model.company.Company;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns the CompanyList.
      *
-     * @see seedu.tinner.model.Model#getCompanyList()
+     * @see Model#getCompanyList()
      */
     ReadOnlyCompanyList getCompanyList();
 
-    /** Returns an unmodifiable view of the filtered list of companies */
+    /**
+     * Returns an unmodifiable view of the filtered list of companies
+     */
     ObservableList<Company> getFilteredCompanyList();
 
     /**

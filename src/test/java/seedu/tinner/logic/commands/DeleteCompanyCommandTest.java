@@ -17,6 +17,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.UniqueReminderList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +25,9 @@ import seedu.tinner.model.company.Company;
  */
 public class DeleteCompanyCommandTest {
 
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
+    private Model model = new ModelManager(getTypicalCompanyList(),
+            new UserPrefs(), reminderList);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +36,7 @@ public class DeleteCompanyCommandTest {
 
         String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS, companyToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), reminderList);
         expectedModel.deleteCompany(companyToDelete);
 
         assertCommandSuccess(deleteCompanyCommand, model, expectedMessage, expectedModel);
@@ -56,7 +59,7 @@ public class DeleteCompanyCommandTest {
 
         String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS, companyToDelete);
 
-        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), reminderList);
         expectedModel.deleteCompany(companyToDelete);
         showNoCompany(expectedModel);
 

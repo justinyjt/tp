@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<VBox id="reminderDateListPanel" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
+  <VBox alignment="CENTER_LEFT">
+    <padding>
+      <Insets top="25" right="25" bottom="20" left="25"/>
+    </padding>
+    <Label fx:id="header" text="\$header" styleClass="cell_giant_label"/>
+  </VBox>
+  <ListView id="reminderDateListView" fx:id="reminderDateListView" VBox.vgrow="ALWAYS"/>
+</VBox>

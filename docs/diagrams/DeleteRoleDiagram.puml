@@ -1,0 +1,25 @@
+@startuml
+!include detailed.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class DeleteRoleCommandParser {
+    +DeleteRoleCommand parse(String args)
+}
+Class DeleteRoleCommand {
+    -Index companyIndex
+    -Index roleIndex
+    +DeleteRoleCommand(Index companyIndex, Index roleIndex)
+    + CommandResult execute(Model model)
+}
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+DeleteRoleCommand -up-|> Command
+
+DeleteRoleCommandParser -up-|> Parser
+DeleteRoleCommandParser .down.> DeleteRoleCommand: creates >
+
+DeleteRoleCommandParser -[hidden]Down- DeleteRoleCommand
+@enduml

@@ -19,7 +19,7 @@ public class RoleName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*\\(?[\\p{Alnum} ]*\\)?";
 
-    public final String fullName;
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -29,7 +29,7 @@ public class RoleName {
     public RoleName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        value = name;
     }
 
     /**
@@ -41,7 +41,7 @@ public class RoleName {
 
     private static boolean areValidBrackets(String test) {
         int count = 0;
-        for (char c: test.toCharArray()) {
+        for (char c : test.toCharArray()) {
             if (c == '(') {
                 count += 1;
             }
@@ -57,19 +57,19 @@ public class RoleName {
 
     @Override
     public String toString() {
-        return fullName;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RoleName // instanceof handles nulls
-                && fullName.equals(((RoleName) other).fullName)); // state check
+                && value.equals(((RoleName) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return value.hashCode();
     }
 
 }

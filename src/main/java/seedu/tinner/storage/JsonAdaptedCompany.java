@@ -55,7 +55,7 @@ class JsonAdaptedCompany {
      * Converts a given {@code Company} into this class for Jackson use.
      */
     public JsonAdaptedCompany(Company source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -118,12 +118,15 @@ class JsonAdaptedCompany {
         final FavouriteStatus modelFavouriteStatus = new FavouriteStatus(Boolean.parseBoolean(favouriteStatus));
 
         final RoleList companyRoles = new RoleList();
+        final UniqueReminderList reminderList = UniqueReminderList.getInstance();
+
         for (JsonAdaptedRole role : roles) {
             Role currRole = role.toModelType();
             companyRoles.addRole(currRole);
-            if (currRole.needsReminding()) {
-                Reminder reminder = new Reminder(modelName, currRole.getName(), currRole.getDeadline());
-                UniqueReminderList.getReminderList().add(reminder);
+            if (currRole.getDeadline().isWithinReminderWindow()) {
+                Reminder reminder =
+                        new Reminder(modelName, currRole.getName(), currRole.getStatus(), currRole.getDeadline());
+                UniqueReminderList.getInstance().add(reminder);
             }
         }
 

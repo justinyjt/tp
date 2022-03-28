@@ -11,6 +11,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.testutil.CompanyBuilder;
 
 /**
@@ -22,14 +23,15 @@ public class AddCompanyCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     }
 
     @Test
     public void execute_newCompany_success() {
         Company validCompany = new CompanyBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        Model expectedModel =
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         expectedModel.addCompany(validCompany);
 
         assertCommandSuccess(new AddCompanyCommand(validCompany), model,

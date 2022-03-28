@@ -1,0 +1,31 @@
+@startuml
+!include detailed.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class FindCommandParser {
+    +FindCommand parse(String args)
+}
+Class FindCommand {
+    -CompanyNameContainsKeywordsPredicate companyPredicate
+    -RoleNameContainsKeywordsPredicate rolePredicate
+    +FindCommand(CompanyNameContainsKeywordsPredicate companyPredicate, RoleNameContainsKeywordsPredicate rolePredicate)
+    +CommandResult execute(Model model)
+}
+Class RoleNameContainsKeywordsPredicate
+Class CompanyNameContainsKeywordsPredicate
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+FindCommand -right-> "1" CompanyNameContainsKeywordsPredicate
+FindCommand --> "1" RoleNameContainsKeywordsPredicate
+FindCommand -up-|> Command
+
+FindCommandParser -up-|> Parser
+FindCommandParser .down.> FindCommand: creates >
+FindCommandParser .down.> CompanyNameContainsKeywordsPredicate: creates >
+FindCommandParser .down.> RoleNameContainsKeywordsPredicate: creates >
+
+FindCommandParser -[hidden]Down- FindCommand
+@enduml

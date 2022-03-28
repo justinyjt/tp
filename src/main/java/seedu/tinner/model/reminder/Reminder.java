@@ -7,24 +7,28 @@ import java.util.Objects;
 import seedu.tinner.model.company.CompanyName;
 import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.RoleName;
+import seedu.tinner.model.role.Status;
+
 
 /**
  * Represents a Reminder in Tinner.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Reminder {
+public class Reminder implements Comparable<Reminder> {
 
     private final CompanyName companyName;
-    private final RoleName roleName;
     private final Deadline deadline;
+    private final RoleName roleName;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
      */
-    public Reminder(CompanyName companyName, RoleName roleName, Deadline deadline) {
-        requireAllNonNull(companyName, roleName, deadline);
+    public Reminder(CompanyName companyName, RoleName roleName, Status status, Deadline deadline) {
+        requireAllNonNull(companyName, roleName, status, deadline);
         this.companyName = companyName;
         this.roleName = roleName;
+        this.status = status;
         this.deadline = deadline;
     }
 
@@ -34,6 +38,10 @@ public class Reminder {
 
     public RoleName getRoleName() {
         return roleName;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public Deadline getDeadline() {
@@ -54,12 +62,8 @@ public class Reminder {
             return false;
         }
 
-        return otherReminder.getCompanyName().toString().replaceAll("\\s+", "")
-                .equals(getCompanyName().toString().replaceAll("\\s+", ""))
-                && otherReminder.getRoleName().toString().replaceAll("\\s+", "")
-                .equals(getRoleName().toString().replaceAll("\\s+", ""))
-                && otherReminder.getDeadline().toString().replaceAll("\\s+", "")
-                .equals(getDeadline().toString().replaceAll("\\s+", ""));
+        return otherReminder.getCompanyName().equals(getCompanyName())
+                && otherReminder.getRoleName().equals(getRoleName());
     }
 
     /**
@@ -79,6 +83,7 @@ public class Reminder {
         Reminder otherReminder = (Reminder) other;
         return otherReminder.getCompanyName().equals(getCompanyName())
                 && otherReminder.getRoleName().equals(getRoleName())
+                && otherReminder.getStatus().equals(getStatus())
                 && otherReminder.getDeadline().equals(getDeadline());
     }
 
@@ -98,5 +103,10 @@ public class Reminder {
                 .append(getDeadline());
 
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Reminder other) {
+        return this.getDeadline().value.compareTo(other.getDeadline().value);
     }
 }

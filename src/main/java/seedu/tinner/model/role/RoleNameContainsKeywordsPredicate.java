@@ -20,7 +20,7 @@ public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
      * @param roleNameKeywords List of strings representing role name keywords entered by user
      */
     public RoleNameContainsKeywordsPredicate(List<String> roleNameKeywords) {
-        assert(!roleNameKeywords.contains(""));
+        assert (!roleNameKeywords.contains(""));
         this.roleNameKeywords = roleNameKeywords;
     }
 
@@ -31,7 +31,7 @@ public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
     @Override
     public boolean test(Role role) {
         return roleNameKeywords.isEmpty() || roleNameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(role.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(role.getName().value, keyword));
     }
 
     @Override

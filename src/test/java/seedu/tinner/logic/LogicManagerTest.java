@@ -27,6 +27,7 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.UserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.storage.JsonCompanyListStorage;
 import seedu.tinner.storage.JsonUserPrefsStorage;
 import seedu.tinner.storage.StorageManager;
@@ -129,7 +130,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        Model expectedModel =
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CompanyListParser" as CompanyListParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "companyPredicate\n:CompanyNameContains\nKeywordsPredicate" as CompanyNameContainsKeywordsPredicate LOGIC_COLOR
+participant "rolePredicate\n:RoleNameContains\nKeywordsPredicate" as RoleNameContainsKeywordsPredicate LOGIC_COLOR
+participant "findCommand:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find c/meta \nr/software mobile")
+activate LogicManager
+
+LogicManager -> CompanyListParser : parseCommand(\n"find c/meta \nr/software mobile")
+activate CompanyListParser
+
+create FindCommandParser
+CompanyListParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> CompanyListParser
+deactivate FindCommandParser
+
+CompanyListParser -> FindCommandParser : parse("c/meta \nr/software mobile")
+activate FindCommandParser
+
+create CompanyNameContainsKeywordsPredicate
+FindCommandParser -> CompanyNameContainsKeywordsPredicate : CompanyNameContainsKeywords\nPredicate(["software", "mobile"], ["meta"])
+activate CompanyNameContainsKeywordsPredicate
+
+CompanyNameContainsKeywordsPredicate --> FindCommandParser : companyPredicate
+deactivate CompanyNameContainsKeywordsPredicate
+
+create RoleNameContainsKeywordsPredicate
+FindCommandParser -> RoleNameContainsKeywordsPredicate : RoleNameContainsKeywords\nPredicate(["software", "mobile"])
+activate RoleNameContainsKeywordsPredicate
+
+RoleNameContainsKeywordsPredicate --> FindCommandParser : rolePredicate
+deactivate RoleNameContainsKeywordsPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : FindCommand(companyPredicate, rolePredicate)
+activate FindCommand
+
+FindCommand --> FindCommandParser : findCommand
+deactivate FindCommand
+
+FindCommandParser --> CompanyListParser : FindCommand
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> CompanyListParser
+destroy FindCommandParser
+
+CompanyListParser --> LogicManager : FindCommand
+deactivate CompanyListParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredCompanyList(\ncompanyPredicate, rolePredicate)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+create CommandResult
+FindCommand-> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

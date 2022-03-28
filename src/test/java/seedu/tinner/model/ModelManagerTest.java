@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tinner.commons.core.GuiSettings;
 import seedu.tinner.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.RoleNameContainsKeywordsPredicate;
 import seedu.tinner.testutil.CompanyListBuilder;
 
@@ -29,6 +30,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new CompanyList(), new CompanyList(modelManager.getCompanyList()));
+        assertEquals(UniqueReminderList.getInstance(), modelManager.getReminderList());
     }
 
     @Test
@@ -102,10 +104,11 @@ public class ModelManagerTest {
                 new CompanyListBuilder().withCompany(META).withCompany(AMAZON).build();
         CompanyList differentCompanyList = new CompanyList();
         UserPrefs userPrefs = new UserPrefs();
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
 
         // same values -> returns true
-        modelManager = new ModelManager(companyList, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(companyList, userPrefs);
+        modelManager = new ModelManager(companyList, userPrefs, reminderList);
+        ModelManager modelManagerCopy = new ModelManager(companyList, userPrefs, reminderList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -118,13 +121,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different companyList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentCompanyList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentCompanyList, userPrefs, reminderList)));
 
         // different filteredList -> returns false
-        String[] keywords = META.getName().fullName.split("\\s+");
+        String[] keywords = META.getName().value.split("\\s+");
         modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords),
                         Arrays.asList(keywords)), new RoleNameContainsKeywordsPredicate(Arrays.asList(" ")));
-        assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs, reminderList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES, PREDICATE_SHOW_ALL_ROLES);
@@ -132,6 +135,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setCompanyListFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(companyList, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(companyList, differentUserPrefs, reminderList)));
     }
 }

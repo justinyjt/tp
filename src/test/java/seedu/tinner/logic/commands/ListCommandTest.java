@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
+import seedu.tinner.model.reminder.UniqueReminderList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
-        expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
+        expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     }
 
     @Test

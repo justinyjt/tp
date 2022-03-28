@@ -1,6 +1,7 @@
 package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tinner.commons.core.Messages.MESSAGE_NO_VALUE_AFTER_PREFIX;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_ROLE_NAME;
 import static seedu.tinner.logic.parser.ParserUtil.arePrefixesPresent;
@@ -30,6 +31,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         if ((!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME)
                 && !arePrefixesPresent(argMultimap, PREFIX_ROLE_NAME)) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        if (ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_COMPANY_NAME)
+                || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_ROLE_NAME)) {
+            throw new ParseException(String.format(MESSAGE_NO_VALUE_AFTER_PREFIX,
                     FindCommand.MESSAGE_USAGE));
         }
 

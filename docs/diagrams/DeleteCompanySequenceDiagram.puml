@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CompanyListParser" as CompanyListParser LOGIC_COLOR
+participant ":DeleteCompanyCommandParser" as DeleteCompanyCommandParser LOGIC_COLOR
+participant "d:DeleteCompanyCommand" as DeleteCompanyCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteCompany 1")
+activate LogicManager
+
+LogicManager -> CompanyListParser : parseCommand("deleteCompany 1")
+activate CompanyListParser
+
+create DeleteCompanyCommandParser
+CompanyListParser -> DeleteCompanyCommandParser
+activate DeleteCompanyCommandParser
+
+DeleteCompanyCommandParser --> CompanyListParser
+deactivate DeleteCompanyCommandParser
+
+CompanyListParser -> DeleteCompanyCommandParser : parse("1")
+activate DeleteCompanyCommandParser
+
+create DeleteCompanyCommand
+DeleteCompanyCommandParser -> DeleteCompanyCommand
+activate DeleteCompanyCommand
+
+DeleteCompanyCommand --> DeleteCompanyCommandParser : d
+deactivate DeleteCompanyCommand
+
+DeleteCompanyCommandParser --> CompanyListParser : d
+deactivate DeleteCompanyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCompanyCommandParser -[hidden]-> CompanyListParser
+destroy DeleteCompanyCommandParser
+
+CompanyListParser --> LogicManager : d
+deactivate CompanyListParser
+
+LogicManager -> DeleteCompanyCommand : execute()
+activate DeleteCompanyCommand
+
+DeleteCompanyCommand -> Model : deleteCompany(1)
+activate Model
+
+Model --> DeleteCompanyCommand
+deactivate Model
+
+create CommandResult
+DeleteCompanyCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCompanyCommand
+deactivate CommandResult
+
+DeleteCompanyCommand --> LogicManager : result
+deactivate DeleteCompanyCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

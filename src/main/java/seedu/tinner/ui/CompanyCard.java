@@ -22,6 +22,13 @@ public class CompanyCard extends UiPart<Region> {
     private static final int STAR_ICON_DIMENSIONS = 15;
     private static final Image STAR_ICON = new Image("/images/star.png", true);
 
+    private static final String BLACK_BG = "-fx-background-color: black;";
+    private static final String WHITE_BG = "-fx-background-color: white; -fx-text-fill: black;";
+    private static final String GREEN_BG = "-fx-background-color: #36bf00";
+    private static final String PURPLE_BG = "-fx-background-color: #b114c9;";
+    private static final String ORANGE_BG = "-fx-background-color: #e88700;";
+    private static final String RED_BG = "-fx-background-color: #d62700;";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -60,7 +67,7 @@ public class CompanyCard extends UiPart<Region> {
         super(FXML);
         this.company = company;
         id.setText(displayedIndex + ". ");
-        name.setText(company.getName().fullName);
+        name.setText(company.getName().value);
 
         String phoneField = company.getPhone().value;
         String addressField = company.getAddress().value;
@@ -96,11 +103,39 @@ public class CompanyCard extends UiPart<Region> {
 
     /**
      * Populates <code>roleTags</code> with names of roles tagged to the company represented by this
-     * <code>CompanyCard</code>
+     * <code>CompanyCard</code> and color code the labels accordingly to the statuses.
      */
     public void setRoleTags(ObservableList<Role> roleList) {
         roleTags.getChildren().clear();
-        roleList.forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+
+        roleList.forEach(roleTag -> {
+            Label label = new Label(roleTag.getName().value);
+            setRoleTagColor(label, roleTag.getStatus().value);
+            roleTags.getChildren().add(label);
+
+        });
+    }
+
+    private void setRoleTagColor(Label label, String status) {
+        switch (status) {
+        case "applying":
+            label.setStyle(WHITE_BG);
+            break;
+        case "offered":
+            label.setStyle(GREEN_BG);
+            break;
+        case "pending":
+            label.setStyle(ORANGE_BG);
+            break;
+        case "rejected":
+            label.setStyle(RED_BG);
+            break;
+        case "complete":
+            label.setStyle(BLACK_BG);
+            break;
+        default:
+            label.setStyle(PURPLE_BG);
+        }
     }
 
     /**

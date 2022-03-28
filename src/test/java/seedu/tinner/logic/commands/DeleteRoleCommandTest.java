@@ -19,6 +19,7 @@ import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.UserPrefs;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 
 /**
@@ -26,7 +27,8 @@ import seedu.tinner.model.role.Role;
  * {@code DeleteRoleCommand}.
  */
 public class DeleteRoleCommandTest {
-    private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs());
+    private Model model =
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
 
     @Test
     public void execute_validIndexList_success() {
@@ -35,7 +37,8 @@ public class DeleteRoleCommandTest {
         DeleteRoleCommand deleteRoleCommand = new DeleteRoleCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_ROLE);
 
         String expectedMessage = String.format(DeleteRoleCommand.MESSAGE_DELETE_ROLE_SUCCESS, roleToDelete);
-        ModelManager expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
+        ModelManager expectedModel =
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         assertCommandSuccess(deleteRoleCommand, model, expectedMessage, expectedModel);
     }
 

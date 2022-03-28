@@ -10,7 +10,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**:
     * https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-progress.html#:~:text=A0222764_-,7,-Forked
-  
+
 * **New features**:
     * To be added soon
 
@@ -19,7 +19,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * To be added soon
-    
+
 * **Documentation**:
     * To be added soon
 

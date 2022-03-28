@@ -110,12 +110,12 @@ public interface Model {
      * Adds the given role.
      * {@code role} must not already exist in the Company.
      */
-    void addRole (Index companyIndex, Role role);
+    void addRole(Index companyIndex, Role role);
 
     /**
      * Returns true if a role with the same identity as {@code role} exists in the role list.
      */
-    boolean hasRole (Index companyIndex, Role role);
+    boolean hasRole(Index companyIndex, Role role);
 
     /**
      * Returns an unmodifiable view of the list of {@code Role}.

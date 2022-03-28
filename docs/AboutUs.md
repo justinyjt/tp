@@ -38,7 +38,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 [[portfolio](team/jinnhl.html)]
 
 * Role: Integration Reviewer
-* Responsibilities: 
+* Responsibilities:
 
 ### Justin Yip
 
@@ -47,7 +47,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 [[github](http://github.com/justinyjt)] [[portfolio](team/justinyjt.html)]
 
 * Role: Code Quality and Documentation Reviewer
-* Responsibilities: 
+* Responsibilities:
 
 ### Kerby Soh
 
