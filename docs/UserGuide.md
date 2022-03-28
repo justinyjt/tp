@@ -3,7 +3,14 @@ layout: page
 title: User Guide
 ---
 
-Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
+Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Our value proposition is simple: 
+
+    Tinner allows you to
+        1. Track (your internship applications)
+        2. Remind (you of the application's significant dates)
+        3. Review (your past applications to learn from mistakes)
+
+If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
 
 ## Table of Contents
 
@@ -21,6 +28,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * [Finding a specific company or role: `find`](#c-find-c-r)
 * [Favouriting a specific company: `favourite`](#c-favourite-c)  
 * [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
+* [Changing the reminder window: `setWindow`](#c-setWindow-c)
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -57,7 +65,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/COMPANY`, `COMPANY` is a parameter which can be used as `add n/Google`.
+  e.g. in `add n/COMPANY`, `COMPANY` is a parameter* which can be used as `add n/Google`.
 
 * Items in square brackets are optional.<br>
   e.g `n/COMPANY [p/PHONE_NUMBER]` can be used as `n/Google P/65427981` or as `n/Google`.
@@ -71,6 +79,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+*Note: a parameter is the user input that is given to a command.
 </div>
 
 ### Viewing help : `help`
@@ -151,23 +160,25 @@ Examples:
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
   company in Tinner.
 
-### Edits an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
-Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
 
 * Edits the company at the specified INDEX. The index refers to the index number shown in the displayed company list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
+Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
 Examples:
 
 * editCompany 1 p/91234567 e/johndoe@example.com
 
-### Edits an existing role from company : `editRole` <a id="c-edit-r"></a>
-Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]`
+### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
 
 * Edits the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refers to the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+* Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]`
 
 Examples:
 
@@ -175,10 +186,10 @@ Examples:
   
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
-Find companies or/and roles depending on the format given.
-If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
-If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
-If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
+* Find companies or/and roles depending on the format given.
+* If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
+* If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
+* If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
 
 Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
@@ -196,7 +207,7 @@ Examples:
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
 
-Favourite a specific company from the list of companies
+Favourite a specific company from the list of companies.
 
 Format: `favourite COMPANY_INDEX`
 
@@ -211,7 +222,7 @@ Examples:
 
 ### Unfavouriting a specific company: `unfavourite` <a id="c-unfavourite-c"></a>
 
-Unfavourite a specific company from the list of companies
+Unfavourite a specific company from the list of companies.
 
 Format: `unfavourite COMPANY_INDEX`
 
@@ -223,6 +234,18 @@ Examples:
 
 * `list` followed by, `unfavourite 1` unfavourites the 1<sup>st</sup>
   company in Tinner.
+
+### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
+
+* The parameter `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's reminder date.
+* Sets the reminder window to the specified `REMINDER_WINDOW`.
+* All roles with reminder dates that are within the specified `REMINDER_WINDOW` days away from today will show up in the reminders window.
+
+Format: `setWindow REMINDER_WINDOW`
+
+Examples:
+
+* `setWindow 14` would make Tinner remind you of an upcoming reminder two weeks prior to the associated role's reminder date.
   
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
@@ -242,18 +265,19 @@ _Details coming soon ..._
 
 ## Command summary <a id="command-summary"></a>
 
-Action | Format, Examples
---------|------------------
-**List companies** | `list`
-**List favourited companies** | `listFavourite`
-**Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`
-**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`
-**Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
-**Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
-**Edit company** | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`
-**Edit role** | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`
-**Find company or role** | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`
-**Favourite company** | `favourite COMPANY_INDEX`
-**Unfavourite company** | `unfavourite COMPANY_INDEX`
-**Help** | `help`
-**Exit Tinner** | `exit`
+| Action                        | Format, Examples                                                                                                                                                                                                   |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **List companies**            | `list`                                                                                                                                                                                                             |
+| **List favourited companies** | `listFavourite`                                                                                                                                                                                                    |
+| **Add company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` |
+| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
+| **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `                                                                                                                                                     |
+| **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `                                                                                                                                              |
+| **Edit company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                         |
+| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
+| **Find company or role**      | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`                                                                              |
+| **Favourite company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
+| **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
+| **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
+| **Help**                      | `help`                                                                                                                                                                                                             |
+| **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
