@@ -267,7 +267,7 @@ Exits the Tinner application.
 Format: `exit`
 
 ### Colour code of role tags
-Colour coding of roles allows users to quickly obtain information https://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@github.com/justinyjt/tp  about their application statuses at a glance.
+Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
 ![img.png](images/tagcolourcode.png)
 * "applying" : white
 * "pending": orange
@@ -303,5 +303,7 @@ _Details coming soon ..._
 | **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
 | **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
 | **Help**                      | `help`                                                                                                                                                                                                             |
+| **Clear**                     | `clear`                                                    
+                                                                                            |
 | **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 
