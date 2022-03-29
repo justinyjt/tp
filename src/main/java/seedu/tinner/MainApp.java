@@ -23,7 +23,7 @@ import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
 //import seedu.tinner.model.reminder.Reminder;
 import seedu.tinner.model.reminder.UniqueReminderList;
-import seedu.tinner.model.role.Deadline;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.util.SampleDataUtil;
 import seedu.tinner.storage.CompanyListStorage;
 import seedu.tinner.storage.JsonCompanyListStorage;
@@ -171,8 +171,8 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
-        // Set the reminder window of deadline class to what is defined in userPrefs.
-        Deadline.setReminderWindow(initializedPrefs.getReminderWindow());
+        // Set the reminder window of reminder date class to what is defined in userPrefs.
+        ReminderDate.setReminderWindow(initializedPrefs.getReminderWindow());
         return initializedPrefs;
     }
 

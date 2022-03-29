@@ -2,9 +2,9 @@ package seedu.tinner.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 
@@ -41,7 +41,7 @@ public class EditRoleCommandParser implements Parser<EditRoleCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(content, PREFIX_NAME, PREFIX_STATUS,
-                        PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
+                        PREFIX_REMINDER_DATE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
 
         EditRoleCommand.EditRoleDescriptor editRoleDescriptor = new EditRoleCommand.EditRoleDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -50,8 +50,9 @@ public class EditRoleCommandParser implements Parser<EditRoleCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editRoleDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-            editRoleDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
+        if (argMultimap.getValue(PREFIX_REMINDER_DATE).isPresent()) {
+            editRoleDescriptor.setReminderDate(ParserUtil.parseReminderDate(
+                    argMultimap.getValue(PREFIX_REMINDER_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editRoleDescriptor.setDescription(ParserUtil.parseDescription(

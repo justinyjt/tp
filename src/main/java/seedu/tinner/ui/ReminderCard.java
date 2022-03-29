@@ -30,7 +30,7 @@ public class ReminderCard extends UiPart<Region> {
     @FXML
     private Label roleName;
     @FXML
-    private Label deadline;
+    private Label reminderDate;
 
     /**
      * Creates a {@code ReminderCard} with the given {@code Reminder}.
@@ -41,15 +41,15 @@ public class ReminderCard extends UiPart<Region> {
 
         String companyNameField = reminder.getCompanyName().value;
         String roleNameField = reminder.getRoleName().value;
-        String deadlineField = reminder.getDeadline().toString();
+        String reminderDateField = reminder.getReminderDate().toString();
 
         companyName.setText(companyNameField);
         roleName.setText(roleNameField);
-        deadline.setText(deadlineField);
+        reminderDate.setText(reminderDateField);
 
         companyName.setManaged(!companyNameField.isEmpty());
         roleName.setManaged(!roleNameField.isEmpty());
-        deadline.setManaged(!deadlineField.isEmpty());
+        reminderDate.setManaged(!reminderDateField.isEmpty());
     }
 
     @Override

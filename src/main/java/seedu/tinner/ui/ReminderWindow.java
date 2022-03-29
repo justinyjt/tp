@@ -67,7 +67,7 @@ public class ReminderWindow extends UiPart<Stage> {
      *                               </ul>
      */
     public void show() {
-        logger.fine("Showing reminder page for upcoming deadlines.");
+        logger.fine("Showing reminder page for upcoming reminder dates.");
         getRoot().show();
         getRoot().centerOnScreen();
     }

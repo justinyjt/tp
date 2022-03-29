@@ -10,6 +10,7 @@ title: Developer Guide
 
 ### Architecture
 ![Architecture Diagram of the Tinner](images/ArchitectureDiagram.png)
+
 The Architecture Diagram given above explains the high-level design of the Tinner. Tinner follows a multi-layered architecture where the lower layers are independent of higher layers. For example, `Main` can use methods found in `Storage` but not the other way around.
 Below is a quick overview of main components and how they interact with each other.
 
@@ -167,7 +168,7 @@ Note that the lifeline of FindCommandParser should end at the destroy marker but
 4. Either prefix `c/` or `r/` can be absent. Both cannot be absent within the same command or else it would give rise to an invalid command. If absent, an empty array with no keywords is passed as input in the creation of either or both `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
 5. Then the `FindCommandParser#parse()` method will create an `FindCommand` object with the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object.  
 6. The `FindCommand` object will be returned to the `LogicManager` and will then invoke the `FindCommand#execute()` method to implement the changes.
-7. The `Model#updateFilteredRoleList()` is invoked and filters the list of companies to display only companies which match the company name keywords.
+7. The `Model#updateFilteredCompanyList()` is invoked and filters the list of companies to display only companies which match the company name keywords.
 8. Similarly, the `Model#updateFilteredRoleList()` also filters the list of roles within each company to display only roles which match the role name keywords.  
 9. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
@@ -191,7 +192,7 @@ The following sequence diagram shows how the `editRole` command operation works 
 ![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)
 
 1. The user will first enter the input `editRole 1 1 d/react js`, the `CompayListParser#parseCommand()` method will parse the information `1 1 d/react js` to `EditRoleCommandParser` using the method `parse()` based on the keyword `editRole`.
-2. The `EditRoleCommandParser#parse()` method will create an `EditRoleDescriptor` object with all the non-empty fields with the fields' prefixes that are specified by the user such as `s/`,  `b/`, `d/`, etc. In this example, `EditRoleDescriptor#setDescription()` will be used as the description `d/` is a non-empty field with `react js`.
+2. The `EditRoleCommandParser#parse()` method will create an `EditRoleDescriptor` object with all the non-empty fields with the fields' prefixes that are specified by the user such as `s/`,  `r/`, `d/`, etc. In this example, `EditRoleDescriptor#setDescription()` will be used as the description `d/` is a non-empty field with `react js`.
 3. Then the `EditRoleCommandParser#parse()` method will create an `EditRoleCommand` object with the company index `1`, role index `1` and the `EditRoleDescriptor` object.
 4. The `EditRoleCommand` object will be returned to the `LogicManager` and will then invoke the `EditRoleCommand#execute()` method to implement the changes.
 5. The  `EditRoleCommand#execute()` will check the validity of both the indexes, and invoke the `Model#setRole()` method.
@@ -207,7 +208,6 @@ The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that e
 * Upon a valid user's input using the `deleteRole` command, the `DeleteRoleCommandParser#parse()` retrieves the indices of the role to be deleted from the parsed user input.
 * The `DeleteRoleCommandParser#parse()` then instantiates a `DeleteRoleCommand` that possesses the aforementioned indices.
 * Then invoking the `DeleteRoleCommand#execute()` method will update the internal `CompanyList` and `FilteredList<Company>` of the `ModelManager` to reflect the role deletion.
-
 
 ![UML diagram of the DeleteRole feature](images/DeleteRoleDiagram.png)
 

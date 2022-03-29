@@ -73,7 +73,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
         }
         internalList.add(toAdd);
 
-        LocalDateTime reminderDateTime = toAdd.getDeadline().value;
+        LocalDateTime reminderDateTime = toAdd.getReminderDate().value;
         LocalDate reminderDate = reminderDateTime.toLocalDate();
         dateToReminderMap.computeIfAbsent(reminderDate, k -> new ArrayList<>());
         dateToReminderMap.get(reminderDate).add(toAdd);

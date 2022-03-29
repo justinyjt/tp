@@ -19,7 +19,7 @@
       </padding>
       <Label fx:id="companyName" text="\$companyName" styleClass="cell_big_label"/>
       <Label fx:id="roleName" text="\$roleName" styleClass="cell_small_label"/>
-      <Label fx:id="deadline" text="\$deadline" styleClass="cell_tiny_label"/>
+      <Label fx:id="reminderDate" text="\$reminderDate" styleClass="cell_tiny_label"/>
     </VBox>
   </GridPane>
 </HBox>

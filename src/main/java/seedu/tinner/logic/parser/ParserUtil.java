@@ -12,8 +12,8 @@ import seedu.tinner.model.company.Address;
 import seedu.tinner.model.company.CompanyName;
 import seedu.tinner.model.company.Email;
 import seedu.tinner.model.company.Phone;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 import seedu.tinner.model.role.Stipend;
@@ -187,18 +187,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Parses a {@code String reminderDate} into a {@code ReminderDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code deadline} is invalid.
+     * @throws ParseException if the given {@code reminderDate} is invalid.
      */
-    public static Deadline parseDeadline(String deadline) throws ParseException {
-        requireNonNull(deadline);
-        String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline) || !Deadline.isDeadlineAfter(trimmedDeadline)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+    public static ReminderDate parseReminderDate(String reminderDate) throws ParseException {
+        requireNonNull(reminderDate);
+        String trimmedReminderDate = reminderDate.trim();
+        if (!ReminderDate.isValidReminderDate(trimmedReminderDate) || !ReminderDate.isReminderDateAfter(
+                trimmedReminderDate)) {
+            throw new ParseException(ReminderDate.MESSAGE_CONSTRAINTS);
         }
-        return new Deadline(trimmedDeadline);
+        return new ReminderDate(trimmedReminderDate);
     }
 
     /**

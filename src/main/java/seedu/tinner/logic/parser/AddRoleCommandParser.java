@@ -2,9 +2,9 @@ package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tinner.commons.core.Messages.MESSAGE_NO_VALUE_AFTER_PREFIX;
-import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.tinner.logic.parser.ParserUtil.arePrefixesPresent;
@@ -13,8 +13,8 @@ import javafx.util.Pair;
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.logic.commands.AddRoleCommand;
 import seedu.tinner.logic.parser.exceptions.ParseException;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
@@ -43,15 +43,15 @@ public class AddRoleCommandParser implements Parser<AddRoleCommand> {
         String content = parsedInput.getValue();
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(content, PREFIX_NAME, PREFIX_STATUS,
-                        PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STATUS, PREFIX_DEADLINE)
+                        PREFIX_REMINDER_DATE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STATUS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRoleCommand.MESSAGE_USAGE));
         }
 
         if (ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_NAME)
                 || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_STATUS)
-                || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_DEADLINE)
+                || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_REMINDER_DATE)
                 || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_DESCRIPTION)
                 || ParserUtil.hasPrefixWithoutValue(argMultimap, PREFIX_STIPEND)) {
             throw new ParseException(String.format(MESSAGE_NO_VALUE_AFTER_PREFIX,
@@ -60,10 +60,11 @@ public class AddRoleCommandParser implements Parser<AddRoleCommand> {
 
         RoleName name = ParserUtil.parseRoleName(argMultimap.getValue(PREFIX_NAME).get());
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+        ReminderDate reminderDate = ParserUtil.parseReminderDate
+                (argMultimap.getOptionalValue(PREFIX_REMINDER_DATE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getOptionalValue(PREFIX_DESCRIPTION).get());
         Stipend stipend = ParserUtil.parseStipend(argMultimap.getOptionalValue(PREFIX_STIPEND).get());
-        Role role = new Role(name, status, deadline, description, stipend);
+        Role role = new Role(name, status, reminderDate, description, stipend);
         return new AddRoleCommand(index, role);
     }
 

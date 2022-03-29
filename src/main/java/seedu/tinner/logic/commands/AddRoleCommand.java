@@ -2,9 +2,9 @@ package seedu.tinner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tinner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 
@@ -29,13 +29,13 @@ public class AddRoleCommand extends Command {
             + "companyIndex "
             + PREFIX_NAME + "ROLE_NAME (TYPE) "
             + PREFIX_STATUS + "STATUS "
-            + PREFIX_DEADLINE + "DEADLINE "
+            + PREFIX_REMINDER_DATE + "REMINDER_DATE "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_STIPEND + "STIPEND\n"
             + "Example: " + COMMAND_WORD + " " + "1 "
             + PREFIX_NAME + "Software Engineer "
             + PREFIX_STATUS + "pending "
-            + PREFIX_DEADLINE + "31-01-2022 23:59 "
+            + PREFIX_REMINDER_DATE + "31-01-2022 23:59 "
             + PREFIX_DESCRIPTION + "Frontend "
             + PREFIX_STIPEND + "1000 ";
 

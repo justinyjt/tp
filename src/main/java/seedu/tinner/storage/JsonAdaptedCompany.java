@@ -123,9 +123,9 @@ class JsonAdaptedCompany {
         for (JsonAdaptedRole role : roles) {
             Role currRole = role.toModelType();
             companyRoles.addRole(currRole);
-            if (currRole.getDeadline().isWithinReminderWindow()) {
+            if (currRole.getReminderDate().isWithinReminderWindow()) {
                 Reminder reminder =
-                        new Reminder(modelName, currRole.getName(), currRole.getStatus(), currRole.getDeadline());
+                        new Reminder(modelName, currRole.getName(), currRole.getStatus(), currRole.getReminderDate());
                 UniqueReminderList.getInstance().add(reminder);
             }
         }

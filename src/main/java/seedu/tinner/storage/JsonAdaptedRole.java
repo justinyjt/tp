@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.tinner.commons.exceptions.IllegalValueException;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
@@ -25,7 +25,7 @@ public class JsonAdaptedRole {
 
     private final String name;
     private final String status;
-    private final String deadline;
+    private final String reminderDate;
     private final String description;
     private final String stipend;
 
@@ -34,12 +34,12 @@ public class JsonAdaptedRole {
      */
     @JsonCreator
     public JsonAdaptedRole(@JsonProperty("name") String name, @JsonProperty("status") String status,
-                           @JsonProperty("deadline") String deadline,
+                           @JsonProperty("reminderDate") String reminderDate,
                            @JsonProperty("description") String description,
                            @JsonProperty("stipend") String stipend) {
         this.name = name;
         this.status = status;
-        this.deadline = deadline;
+        this.reminderDate = reminderDate;
         this.description = description;
         this.stipend = stipend;
     }
@@ -50,7 +50,11 @@ public class JsonAdaptedRole {
     public JsonAdaptedRole(Role source) {
         name = source.getName().toString();
         status = source.getStatus().toString();
-        deadline = source.getDeadline().value.format(VALIDATION_FORMATTER);
+        if (source.getReminderDate().value == null) {
+            reminderDate = "";
+        } else {
+            reminderDate = source.getReminderDate().value.format(VALIDATION_FORMATTER);
+        }
         description = source.getDescription().toString();
         stipend = source.getStipend().toString();
     }
@@ -80,28 +84,34 @@ public class JsonAdaptedRole {
         }
         final Status roleStatus = new Status(status);
 
-        if (deadline == null) {
+        if (reminderDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Deadline.class.getSimpleName()));
+                    ReminderDate.class.getSimpleName()));
         }
-        if (!Deadline.isValidDeadline(deadline)) {
-            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
+        if (!ReminderDate.isValidReminderDate(reminderDate)) {
+            throw new IllegalValueException(ReminderDate.MESSAGE_CONSTRAINTS);
         }
-        final Deadline roleDeadline = new Deadline(deadline);
+        final ReminderDate roleReminderDate = new ReminderDate(reminderDate);
 
-
-
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
+        }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description roleDescription = new Description(description);
 
+        if (stipend == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Stipend.class.getSimpleName()));
+        }
         if (!Stipend.isValidStipend(stipend)) {
             throw new IllegalValueException(Stipend.MESSAGE_CONSTRAINTS);
         }
         final Stipend roleStipend = new Stipend(stipend);
 
-        return new Role(modelRoleName, roleStatus, roleDeadline, roleDescription, roleStipend);
+        return new Role(modelRoleName, roleStatus, roleReminderDate, roleDescription, roleStipend);
     }
 
 }

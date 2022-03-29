@@ -2,9 +2,9 @@ package seedu.tinner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tinner.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.tinner.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
@@ -19,8 +19,8 @@ import seedu.tinner.commons.util.CollectionUtil;
 import seedu.tinner.logic.commands.exceptions.CommandException;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.company.Company;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
@@ -41,14 +41,14 @@ public class EditRoleCommand extends Command {
             + "Parameters: COMPANY_INDEX ROLE_INDEX (both must be positive integers) "
             + "[" + PREFIX_NAME + "ROLENAME] "
             + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_DEADLINE + "DEADLINE] "
+            + "[" + PREFIX_REMINDER_DATE + "REMINDER_DATE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_STIPEND + "STIPEND]...\n"
             + "Example: " + COMMAND_WORD + " 1 1 "
             + PREFIX_STATUS + "PENDING "
             + PREFIX_STIPEND + "3000";
 
-    public static final String MESSAGE_EDIT_ROLE_SUCCESS = "Edited Role: %1$s %1$s";
+    public static final String MESSAGE_EDIT_ROLE_SUCCESS = "Edited Role: %1$s";
     public static final String MESSAGE_DUPLICATE_ROLE = "This role already exists in the "
             + "company.";
 
@@ -108,12 +108,12 @@ public class EditRoleCommand extends Command {
 
         RoleName updatedName = editRoleDescriptor.getName().orElse(roleToEdit.getName());
         Status updatedStatus = editRoleDescriptor.getStatus().orElse(roleToEdit.getStatus());
-        Deadline updatedDeadline = editRoleDescriptor.getDeadline().orElse(roleToEdit.getDeadline());
+        ReminderDate updatedReminderDate = editRoleDescriptor.getReminderDate().orElse(roleToEdit.getReminderDate());
         Description updatedDescription =
                 editRoleDescriptor.getDescription().orElse(roleToEdit.getDescription());
         Stipend updatedStipend = editRoleDescriptor.getStipend().orElse(roleToEdit.getStipend());
 
-        return new Role(updatedName, updatedStatus, updatedDeadline, updatedDescription, updatedStipend);
+        return new Role(updatedName, updatedStatus, updatedReminderDate, updatedDescription, updatedStipend);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class EditRoleCommand extends Command {
     public static class EditRoleDescriptor {
         private RoleName name;
         private Status status;
-        private Deadline deadline;
+        private ReminderDate reminderDate;
         private Description description;
         private Stipend stipend;
 
@@ -143,7 +143,7 @@ public class EditRoleCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, status, deadline, description, stipend);
+            return CollectionUtil.isAnyNonNull(name, status, reminderDate, description, stipend);
         }
 
         public void setName(RoleName name) {
@@ -162,12 +162,12 @@ public class EditRoleCommand extends Command {
             return Optional.ofNullable(status);
         }
 
-        public void setDeadline(Deadline deadline) {
-            this.deadline = deadline;
+        public void setReminderDate(ReminderDate reminderDate) {
+            this.reminderDate = reminderDate;
         }
 
-        public Optional<Deadline> getDeadline() {
-            return Optional.ofNullable(deadline);
+        public Optional<ReminderDate> getReminderDate() {
+            return Optional.ofNullable(reminderDate);
         }
 
         public void setDescription(Description description) {
@@ -203,7 +203,7 @@ public class EditRoleCommand extends Command {
 
             return getName().equals(e.getName())
                     && getStatus().equals(e.getStatus())
-                    && getDeadline().equals(e.getDeadline())
+                    && getReminderDate().equals(e.getReminderDate())
                     && getDescription().equals(e.getDescription())
                     && getStipend().equals(e.getStipend());
         }

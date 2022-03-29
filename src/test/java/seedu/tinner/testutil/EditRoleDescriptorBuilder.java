@@ -1,8 +1,8 @@
 package seedu.tinner.testutil;
 
 import seedu.tinner.logic.commands.EditRoleCommand;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
@@ -30,7 +30,7 @@ public class EditRoleDescriptorBuilder {
         descriptor = new EditRoleCommand.EditRoleDescriptor();
         descriptor.setName(role.getName());
         descriptor.setStatus(role.getStatus());
-        descriptor.setDeadline(role.getDeadline());
+        descriptor.setReminderDate(role.getReminderDate());
         descriptor.setDescription(role.getDescription());
         descriptor.setStipend(role.getStipend());
     }
@@ -52,10 +52,10 @@ public class EditRoleDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Deadline} of the {@code EditRoleDescriptor} that we are building.
+     * Sets the {@code ReminderDate} of the {@code EditRoleDescriptor} that we are building.
      */
-    public EditRoleDescriptorBuilder withDeadline(String deadline) {
-        descriptor.setDeadline(new Deadline(deadline));
+    public EditRoleDescriptorBuilder withReminderDate(String reminderDate) {
+        descriptor.setReminderDate(new ReminderDate(reminderDate));
         return this;
     }
 

@@ -14,8 +14,8 @@ import seedu.tinner.model.company.Email;
 import seedu.tinner.model.company.FavouriteStatus;
 import seedu.tinner.model.company.Phone;
 import seedu.tinner.model.company.RoleList;
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.Status;
 import seedu.tinner.model.role.Stipend;
@@ -27,11 +27,11 @@ public class SampleDataUtil {
 
     private static final Role SAMPLE_ROLE_1 = new Role(
             new seedu.tinner.model.role.RoleName("Backend engineer"),
-            new Status("pending"), new Deadline("27-02-2022 18:00"),
+            new Status("pending"), new ReminderDate("27-02-2022 18:00"),
             new Description("Backend engineer"), new Stipend("1000"));
     private static final Role SAMPLE_ROLE_2 = new Role(
             new seedu.tinner.model.role.RoleName("Frontend engineer"),
-            new Status("pending"), new Deadline("28-02-2022 22:00"),
+            new Status("pending"), new ReminderDate("28-02-2022 22:00"),
             new Description("Frontend engineer"), new Stipend("1000"));
 
     private static final RoleList SAMPLE_ROLES_1 = new RoleList();

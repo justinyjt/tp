@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tinner.logic.commands.FavouriteCompanyCommand.createFavouritedCompany;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.tinner.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
@@ -31,7 +31,7 @@ import seedu.tinner.testutil.EditCompanyDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2023 00:00";
+    public static final String VALID_REMINDER_DATE_SOFTWARE_ENGINEER = "01-01-2023 00:00";
     public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
     public static final String VALID_STIPEND_SOFTWARE_ENGINEER = "8888";
     public static final String VALID_STATUS_SOFTWARE_ENGINEER = "offered";
@@ -58,8 +58,8 @@ public class CommandTestUtil {
     public static final String INDEX_DESC_SOFTWARE_ENGINEER = " 1";
     public static final String NAME_DESC_SOFTWARE_ENGINEER = " " + PREFIX_NAME + VALID_NAME_SOFTWARE_ENGINEER;
     public static final String STATUS_DESC_SOFTWARE_ENGINEER = " " + PREFIX_STATUS + VALID_STATUS_SOFTWARE_ENGINEER;
-    public static final String DEADLINE_DESC_SOFTWARE_ENGINEER =
-            " " + PREFIX_DEADLINE + VALID_DEADLINE_SOFTWARE_ENGINEER;
+    public static final String REMINDER_DATE_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_REMINDER_DATE + VALID_REMINDER_DATE_SOFTWARE_ENGINEER;
     public static final String DESCRIPTION_DESC_SOFTWARE_ENGINEER =
             " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SOFTWARE_ENGINEER;
     public static final String STIPEND_DESC_SOFTWARE_ENGINEER =
@@ -68,8 +68,8 @@ public class CommandTestUtil {
     public static final String INVALID_INDEX_DESC = " ";
     public static final String INVALID_ROLE_NAME_DESC = " " + PREFIX_NAME + "Softw@re Engineer";
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "dont know";
-    public static final String INVALID_DEADLINE_DESC =
-            " " + PREFIX_DEADLINE + "01-01-1999 00:00";
+    public static final String INVALID_REMINDER_DATE_DESC =
+            " " + PREFIX_REMINDER_DATE + "01-01-1999 00:00";
     public static final String INVALID_DESCRIPTION_DESC =
             " " + PREFIX_DESCRIPTION + "Fronte^d";
     public static final String INVALID_STIPEND_DESC = " " + PREFIX_STIPEND + "one thousand";

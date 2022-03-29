@@ -32,7 +32,7 @@ Class JsonAdaptedCompany {
 Class JsonAdaptedRole {
     {field} name: String
     {field} status: String
-    {field} deadline: String
+    {field} reminderDate: String
     {field} description: String
     {field} stipend: String
 }

@@ -12,7 +12,7 @@ public class Role {
 
     private final RoleName roleName;
     private final Status status;
-    private final Deadline deadline;
+    private final ReminderDate reminderDate;
 
     // "optional" in the sense that they can be empty strings
     private final Description description;
@@ -21,12 +21,12 @@ public class Role {
     /**
      * Every field must be present and not null.
      */
-    public Role(RoleName roleName, Status status, Deadline deadline, Description description,
+    public Role(RoleName roleName, Status status, ReminderDate reminderDate, Description description,
                 Stipend stipend) {
-        requireAllNonNull(roleName, status, deadline, description, stipend);
+        requireAllNonNull(roleName, status, reminderDate, description, stipend);
         this.roleName = roleName;
         this.status = status;
-        this.deadline = deadline;
+        this.reminderDate = reminderDate;
         this.description = description;
         this.stipend = stipend;
     }
@@ -39,8 +39,8 @@ public class Role {
         return status;
     }
 
-    public Deadline getDeadline() {
-        return deadline;
+    public ReminderDate getReminderDate() {
+        return reminderDate;
     }
 
     public Description getDescription() {
@@ -73,7 +73,7 @@ public class Role {
      * Returns true if the role is within the reminder period and status is not pending, rejected or complete
      */
     public boolean needsReminding() {
-        return deadline.isWithinReminderWindow();
+        return reminderDate.isWithinReminderWindow();
     }
 
     /**
@@ -93,14 +93,14 @@ public class Role {
         Role otherRole = (Role) other;
         return otherRole.getName().equals(getName())
                 && otherRole.getStatus().equals(getStatus())
-                && otherRole.getDeadline().equals(getDeadline())
+                && otherRole.getReminderDate().equals(getReminderDate())
                 && otherRole.getDescription().equals(getDescription())
                 && otherRole.getStipend().equals(getStipend());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roleName, status, deadline, description, stipend);
+        return Objects.hash(roleName, status, reminderDate, description, stipend);
     }
 
     @Override
@@ -109,8 +109,8 @@ public class Role {
         builder.append(getName())
                 .append("; Status: ")
                 .append(getStatus())
-                .append("; Deadline: ")
-                .append(getDeadline())
+                .append("; Reminder Date: ")
+                .append(getReminderDate())
                 .append("; Description: ")
                 .append(getDescription())
                 .append("; Stipend: ")

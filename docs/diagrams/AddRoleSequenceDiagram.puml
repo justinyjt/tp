@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59")
+[-> LogicManager : execute("addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59")
 activate LogicManager
 
-LogicManager ->CompanyListParser : parseCommand("addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59")
+LogicManager ->CompanyListParser : parseCommand("addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59")
 activate CompanyListParser
 
 create AddRoleCommandParser
@@ -27,11 +27,11 @@ activate AddRoleCommandParser
 AddRoleCommandParser --> CompanyListParser
 deactivate AddRoleCommandParser
 
-CompanyListParser -> AddRoleCommandParser : parse("1 n/Data Analyst s/applying b/31-03-2022 23:59")
+CompanyListParser -> AddRoleCommandParser : parse("1 n/Data Analyst s/applying r/31-03-2022 23:59")
 activate AddRoleCommandParser
 
 create Role
-AddRoleCommandParser -> Role : Role(name, status, deadline)
+AddRoleCommandParser -> Role : Role(name, status, reminderDate)
 activate Role
 
 Role --> AddRoleCommandParser : role

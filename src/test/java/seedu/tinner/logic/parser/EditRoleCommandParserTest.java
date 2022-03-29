@@ -1,18 +1,18 @@
 package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tinner.logic.commands.CommandTestUtil.DEADLINE_DESC_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.DESCRIPTION_DESC_SOFTWARE_ENGINEER;
-import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
+import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_REMINDER_DATE_DESC;
 import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_ROLE_NAME_DESC;
 import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_STIPEND_DESC;
 import static seedu.tinner.logic.commands.CommandTestUtil.NAME_DESC_SOFTWARE_ENGINEER;
+import static seedu.tinner.logic.commands.CommandTestUtil.REMINDER_DATE_DESC_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.STATUS_DESC_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.STIPEND_DESC_SOFTWARE_ENGINEER;
-import static seedu.tinner.logic.commands.CommandTestUtil.VALID_DEADLINE_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_NAME_SOFTWARE_ENGINEER;
+import static seedu.tinner.logic.commands.CommandTestUtil.VALID_REMINDER_DATE_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_STATUS_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_STIPEND_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.logic.commands.EditRoleCommand;
-import seedu.tinner.model.role.Deadline;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 import seedu.tinner.model.role.Stipend;
@@ -75,13 +75,13 @@ public class EditRoleCommandParserTest {
         assertParseFailure(parser, "1 1" + INVALID_ROLE_NAME_DESC, RoleName.MESSAGE_CONSTRAINTS);
         // invalid status
         assertParseFailure(parser, "1 1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS);
-        // invalid deadline
-        assertParseFailure(parser, "1 1" + INVALID_DEADLINE_DESC, Deadline.MESSAGE_CONSTRAINTS);
+        // invalid reminder date
+        assertParseFailure(parser, "1 1" + INVALID_REMINDER_DATE_DESC, ReminderDate.MESSAGE_CONSTRAINTS);
         // invalid stipend
         assertParseFailure(parser, "1 1" + INVALID_STIPEND_DESC, Stipend.MESSAGE_CONSTRAINTS);
 
-        // invalid status followed by valid deadline
-        assertParseFailure(parser, "1 1" + INVALID_STATUS_DESC + DEADLINE_DESC_SOFTWARE_ENGINEER,
+        // invalid status followed by valid reminder date
+        assertParseFailure(parser, "1 1" + INVALID_STATUS_DESC + REMINDER_DATE_DESC_SOFTWARE_ENGINEER,
                 Status.MESSAGE_CONSTRAINTS);
 
         // valid status followed by invalid status. The test case for invalid status followed by
@@ -92,7 +92,7 @@ public class EditRoleCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                "1 1" + INVALID_STATUS_DESC + INVALID_STIPEND_DESC + VALID_DEADLINE_SOFTWARE_ENGINEER,
+                "1 1" + INVALID_STATUS_DESC + INVALID_STIPEND_DESC + VALID_REMINDER_DATE_SOFTWARE_ENGINEER,
                 Status.MESSAGE_CONSTRAINTS);
     }
 
@@ -101,12 +101,13 @@ public class EditRoleCommandParserTest {
         Index companyIndex = INDEX_SECOND_COMPANY;
         Index roleIndex = INDEX_FIRST_ROLE;
         String userInput = companyIndex.getOneBased() + " " + roleIndex.getOneBased() + NAME_DESC_SOFTWARE_ENGINEER
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
-                + STIPEND_DESC_SOFTWARE_ENGINEER;
+                + STATUS_DESC_SOFTWARE_ENGINEER + REMINDER_DATE_DESC_SOFTWARE_ENGINEER
+                + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER;
 
         EditRoleCommand.EditRoleDescriptor descriptor =
                 new EditRoleDescriptorBuilder().withName(VALID_NAME_SOFTWARE_ENGINEER)
-                        .withStatus(VALID_STATUS_SOFTWARE_ENGINEER).withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER)
+                        .withStatus(VALID_STATUS_SOFTWARE_ENGINEER)
+                        .withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER)
                         .withDescription(VALID_DESCRIPTION_SOFTWARE_ENGINEER)
                         .withStipend(VALID_STIPEND_SOFTWARE_ENGINEER).build();
         EditRoleCommand expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
@@ -120,11 +121,11 @@ public class EditRoleCommandParserTest {
         Index roleIndex = INDEX_FIRST_ROLE;
 
         String userInput = companyIndex.getOneBased() + " " + roleIndex.getOneBased()
-                + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER;
+                + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER;
 
 
         EditRoleCommand.EditRoleDescriptor descriptor =
-                new EditRoleDescriptorBuilder().withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER)
+                new EditRoleDescriptorBuilder().withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER)
                         .withDescription(VALID_DESCRIPTION_SOFTWARE_ENGINEER).build();
         EditRoleCommand expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
 
@@ -152,10 +153,10 @@ public class EditRoleCommandParserTest {
         expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // deadline
+        // reminder date
         userInput = companyIndex.getOneBased() + " " + roleIndex.getOneBased()
-                + DEADLINE_DESC_SOFTWARE_ENGINEER;
-        descriptor = new EditRoleDescriptorBuilder().withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER)
+                + REMINDER_DATE_DESC_SOFTWARE_ENGINEER;
+        descriptor = new EditRoleDescriptorBuilder().withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER)
                 .build();
         expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -182,14 +183,15 @@ public class EditRoleCommandParserTest {
         Index roleIndex = INDEX_FIRST_ROLE;
 
         String userInput = companyIndex.getOneBased() + " " + roleIndex.getOneBased() + NAME_DESC_SOFTWARE_ENGINEER
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
-                + STIPEND_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
-                + STIPEND_DESC_SOFTWARE_ENGINEER;
+                + STATUS_DESC_SOFTWARE_ENGINEER + REMINDER_DATE_DESC_SOFTWARE_ENGINEER
+                + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + REMINDER_DATE_DESC_SOFTWARE_ENGINEER
+                + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER;
 
         EditRoleCommand.EditRoleDescriptor descriptor =
                 new EditRoleDescriptorBuilder().withName(VALID_NAME_SOFTWARE_ENGINEER)
-                        .withStatus(VALID_STATUS_SOFTWARE_ENGINEER).withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER)
+                        .withStatus(VALID_STATUS_SOFTWARE_ENGINEER)
+                        .withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER)
                         .withDescription(VALID_DESCRIPTION_SOFTWARE_ENGINEER)
                         .withStipend(VALID_STIPEND_SOFTWARE_ENGINEER).build();
         EditRoleCommand expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
@@ -214,11 +216,11 @@ public class EditRoleCommandParserTest {
 
         // other valid values specified
         userInput = companyIndex.getOneBased() + " " + roleIndex.getOneBased()
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + INVALID_STIPEND_DESC
+                + STATUS_DESC_SOFTWARE_ENGINEER + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + INVALID_STIPEND_DESC
                 + STIPEND_DESC_SOFTWARE_ENGINEER;
         descriptor =
                 new EditRoleDescriptorBuilder().withStatus(VALID_STATUS_SOFTWARE_ENGINEER)
-                        .withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER)
+                        .withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER)
                         .withStipend(VALID_STIPEND_SOFTWARE_ENGINEER).build();
         expectedCommand = new EditRoleCommand(companyIndex, roleIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

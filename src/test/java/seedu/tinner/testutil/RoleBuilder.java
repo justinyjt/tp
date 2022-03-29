@@ -1,7 +1,7 @@
 package seedu.tinner.testutil;
 
-import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.Description;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
@@ -14,14 +14,14 @@ public class RoleBuilder {
 
     public static final String DEFAULT_NAME = "Google";
     public static final String DEFAULT_STATUS = "applying";
-    public static final String DEFAULT_DEADLINE = "01-01-2022 00:00";
+    public static final String DEFAULT_REMINDER_DATE = "01-01-2022 00:00";
     public static final String DEFAULT_DESCRIPTION = "Frontend web development";
     public static final String DEFAULT_STIPEND = "1000";
 
 
     private RoleName roleName;
     private Status status;
-    private Deadline deadline;
+    private ReminderDate reminderDate;
     private Description description;
     private Stipend stipend;
 
@@ -31,7 +31,7 @@ public class RoleBuilder {
     public RoleBuilder() {
         roleName = new RoleName(DEFAULT_NAME);
         status = new Status(DEFAULT_STATUS);
-        deadline = new Deadline(DEFAULT_DEADLINE);
+        reminderDate = new ReminderDate(DEFAULT_REMINDER_DATE);
         description = new Description(DEFAULT_DESCRIPTION);
         stipend = new Stipend(DEFAULT_STIPEND);
     }
@@ -42,7 +42,7 @@ public class RoleBuilder {
     public RoleBuilder(Role roleToCopy) {
         roleName = roleToCopy.getName();
         status = roleToCopy.getStatus();
-        deadline = roleToCopy.getDeadline();
+        reminderDate = roleToCopy.getReminderDate();
         description = roleToCopy.getDescription();
         stipend = roleToCopy.getStipend();
     }
@@ -64,10 +64,10 @@ public class RoleBuilder {
     }
 
     /**
-     * Sets the {@code Deadline} of the {@code Role} that we are building.
+     * Sets the {@code ReminderDate} of the {@code Role} that we are building.
      */
-    public RoleBuilder withDeadline(String deadline) {
-        this.deadline = new Deadline(deadline);
+    public RoleBuilder withReminderDate(String reminderDate) {
+        this.reminderDate = new ReminderDate(reminderDate);
         return this;
     }
 
@@ -104,6 +104,6 @@ public class RoleBuilder {
     }
 
     public Role build() {
-        return new Role(roleName, status, deadline, description, stipend);
+        return new Role(roleName, status, reminderDate, description, stipend);
     }
 }

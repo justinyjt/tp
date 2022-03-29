@@ -26,7 +26,7 @@
         <Label fx:id="roleName" text="\$first" styleClass="cell_medium_label"/>
       </HBox>
       <Label fx:id="status" styleClass="cell_tiny_label" text="\$status"/>
-      <Label fx:id="deadline" styleClass="cell_tiny_label" text="\$deadline"/>
+      <Label fx:id="reminderDate" styleClass="cell_tiny_label" text="\$reminderDate"/>
       <Label fx:id="description" styleClass="cell_tiny_label" text="\$description"/>
       <Label fx:id="stipend" styleClass="cell_tiny_label" text="\$stipend"/>
     </VBox>

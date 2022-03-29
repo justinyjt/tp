@@ -24,7 +24,7 @@ public class RoleCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private Label deadline;
+    private Label reminderDate;
     @FXML
     private Label description;
     @FXML
@@ -39,9 +39,21 @@ public class RoleCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         roleName.setText(role.getName().value);
         status.setText("Status: " + role.getStatus().value);
-        deadline.setText("Deadline: " + role.getDeadline().toString());
-        description.setText("Description: " + role.getDescription().value);
-        stipend.setText("Stipend: $" + role.getStipend().value);
+        if (role.getReminderDate().toString().isEmpty()) {
+            reminderDate.setText("Reminder Date: N/A");
+        } else {
+            reminderDate.setText("Reminder Date: " + role.getReminderDate().toString());
+        }
+        if (role.getDescription().value.isEmpty()) {
+            description.setText("Description: N/A");
+        } else {
+            description.setText("Description: " + role.getDescription().value);
+        }
+        if (role.getStipend().value.isEmpty()) {
+            stipend.setText("Stipend: N/A");
+        } else {
+            stipend.setText("Stipend: $" + role.getStipend().value);
+        }
     }
 
     @Override

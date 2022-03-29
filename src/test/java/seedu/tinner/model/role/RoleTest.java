@@ -2,9 +2,9 @@ package seedu.tinner.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tinner.logic.commands.CommandTestUtil.VALID_DEADLINE_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_NAME_SOFTWARE_ENGINEER;
+import static seedu.tinner.logic.commands.CommandTestUtil.VALID_REMINDER_DATE_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_STATUS_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_STIPEND_SOFTWARE_ENGINEER;
 import static seedu.tinner.testutil.Assert.assertThrows;
@@ -79,9 +79,9 @@ public class RoleTest {
         editedNetworkEngineer = new RoleBuilder(NETWORK_ENGINEER).withStatus(VALID_STATUS_SOFTWARE_ENGINEER).build();
         assertFalse(editedNetworkEngineer.equals(NETWORK_ENGINEER));
 
-        // different deadline -> returns false
+        // different reminder date -> returns false
         editedNetworkEngineer = new RoleBuilder(NETWORK_ENGINEER)
-                .withDeadline(VALID_DEADLINE_SOFTWARE_ENGINEER).build();
+                .withReminderDate(VALID_REMINDER_DATE_SOFTWARE_ENGINEER).build();
         assertFalse(editedNetworkEngineer.equals(NETWORK_ENGINEER));
 
         // different stipend -> returns false

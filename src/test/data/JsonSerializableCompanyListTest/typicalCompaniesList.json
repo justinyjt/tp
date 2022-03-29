@@ -9,13 +9,13 @@
     "roles" : [ {
       "name" : "ML ENGINEER",
       "status" : "pending",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do ML",
       "stipend" : "1000"
     }, {
       "name" : "MOBILE ENGINEER",
       "status" : "offered",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do mobile engineering",
       "stipend" : "1000"
     } ]
@@ -28,7 +28,7 @@
     "roles" : [ {
       "name" : "MOBILE ENGINEER",
       "status" : "offered",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do mobile engineering",
       "stipend" : "1000"
     } ]
@@ -41,7 +41,7 @@
     "roles" : [ {
       "name" : "NETWORK ENGINEER",
       "status" : "rejected",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do networking",
       "stipend" : "1000"
     } ]
@@ -54,13 +54,13 @@
     "roles" : [ {
       "name" : "MOBILE ENGINEER",
       "status" : "offered",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do mobile engineering",
       "stipend" : "1000"
     }, {
       "name" : "NETWORK ENGINEER",
       "status" : "rejected",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do networking",
       "stipend" : "1000"
     } ]
@@ -73,7 +73,7 @@
     "roles" : [ {
       "name" : "ML ENGINEER",
       "status" : "pending",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do ML",
       "stipend" : "1000"
     } ]
@@ -86,7 +86,7 @@
     "roles" : [ {
       "name" : "NETWORK ENGINEER",
       "status" : "rejected",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do networking",
       "stipend" : "1000"
     } ]
@@ -99,7 +99,7 @@
     "roles" : [ {
       "name" : "NETWORK ENGINEER",
       "status" : "rejected",
-      "deadline" : "01-01-2022 22:00",
+      "reminderDate" : "01-01-2022 22:00",
       "description" : "Do networking",
       "stipend" : "1000"
     } ]

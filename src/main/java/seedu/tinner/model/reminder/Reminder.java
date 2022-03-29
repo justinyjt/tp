@@ -5,7 +5,7 @@ import static seedu.tinner.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.tinner.model.company.CompanyName;
-import seedu.tinner.model.role.Deadline;
+import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 
@@ -17,19 +17,19 @@ import seedu.tinner.model.role.Status;
 public class Reminder implements Comparable<Reminder> {
 
     private final CompanyName companyName;
-    private final Deadline deadline;
+    private final ReminderDate reminderDate;
     private final RoleName roleName;
     private final Status status;
 
     /**
      * Every field must be present and not null.
      */
-    public Reminder(CompanyName companyName, RoleName roleName, Status status, Deadline deadline) {
-        requireAllNonNull(companyName, roleName, status, deadline);
+    public Reminder(CompanyName companyName, RoleName roleName, Status status, ReminderDate reminderDate) {
+        requireAllNonNull(companyName, roleName, status, reminderDate);
         this.companyName = companyName;
         this.roleName = roleName;
         this.status = status;
-        this.deadline = deadline;
+        this.reminderDate = reminderDate;
     }
 
     public CompanyName getCompanyName() {
@@ -44,8 +44,8 @@ public class Reminder implements Comparable<Reminder> {
         return status;
     }
 
-    public Deadline getDeadline() {
-        return deadline;
+    public ReminderDate getReminderDate() {
+        return reminderDate;
     }
 
     /**
@@ -84,12 +84,12 @@ public class Reminder implements Comparable<Reminder> {
         return otherReminder.getCompanyName().equals(getCompanyName())
                 && otherReminder.getRoleName().equals(getRoleName())
                 && otherReminder.getStatus().equals(getStatus())
-                && otherReminder.getDeadline().equals(getDeadline());
+                && otherReminder.getReminderDate().equals(getReminderDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyName, roleName, deadline);
+        return Objects.hash(companyName, roleName, reminderDate);
     }
 
     @Override
@@ -99,14 +99,14 @@ public class Reminder implements Comparable<Reminder> {
                 .append(getCompanyName())
                 .append("; Role: ")
                 .append(getRoleName())
-                .append("; Deadline: ")
-                .append(getDeadline());
+                .append("; Reminder Date: ")
+                .append(getReminderDate());
 
         return builder.toString();
     }
 
     @Override
     public int compareTo(Reminder other) {
-        return this.getDeadline().value.compareTo(other.getDeadline().value);
+        return this.getReminderDate().value.compareTo(other.getReminderDate().value);
     }
 }

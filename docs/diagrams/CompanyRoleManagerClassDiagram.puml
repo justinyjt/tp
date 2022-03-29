@@ -21,7 +21,7 @@ Class UniqueRoleList
 Class Role
 Class RoleName
 Class Status
-Class Deadline
+Class ReminderDate
 Class Description
 Class Stipend
 }
@@ -42,7 +42,7 @@ RoleList *-right-> "1" UniqueRoleList
 UniqueRoleList --> "*" Role
 Role *--> "1" RoleName
 Role *--> "1" Description
-Role *--> "1" Deadline
+Role *--> "1" ReminderDate
 Role *--> "1" Status
 Role *--> "1" Stipend
 

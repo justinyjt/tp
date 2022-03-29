@@ -21,7 +21,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all companies whose names "
             + "contain any of "
             + "the specified keywords (case-insensitive) and roles contains any of the specified keywords"
-            + "(case-insensitive) displays them as a list with index numbers.\n"
+            + "(case-insensitive).\n"
+            + "Displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_COMPANY_NAME
             + "COMPANY_NAME "
