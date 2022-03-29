@@ -304,6 +304,6 @@ _Details coming soon ..._
 | **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
 | **Help**                      | `help`                                                                                                                                                                                                             |
 | **Clear**                     | `clear`                                                    
-                                                                                            |
+|
 | **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 
