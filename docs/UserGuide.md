@@ -245,7 +245,7 @@ Format: `setWindow REMINDER_WINDOW`
 
 Examples:
 
-* `setWindow 14` would make Tinner remind you of all upcoming reminders up to two weeks prior to the associated role's reminder date.
+* `setWindow 14` would make Tinner remind you of all upcoming reminders from up to two weeks prior to the associated role's reminder date.
 
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
