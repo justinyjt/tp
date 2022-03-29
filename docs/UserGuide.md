@@ -303,7 +303,6 @@ _Details coming soon ..._
 | **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
 | **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
 | **Help**                      | `help`                                                                                                                                                                                                             |
-| **Clear**                     | `clear`                                                    
-|
+| **Clear**                     | `clear`                                                                                                                                                                                                             |
 | **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 
