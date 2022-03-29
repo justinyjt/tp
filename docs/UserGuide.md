@@ -252,7 +252,7 @@ Examples:
 Exits the program.
 
 ### Colour code of role tags
-Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
+Colour coding of roles allows users to quickly obtain information https://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@github.com/justinyjt/tp  about their application statuses at a glance.
 ![img.png](images/tagcolourcode.png)
 * "applying" : white
 * "pending": orange
