@@ -266,7 +266,7 @@ in the following format: dd-MM-yyyy HH:mm.
     * rejected
     * complete
 * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
-* The `STIPEND` must be a positive integer going up to 10 digits long.
+* The `STIPEND` must be a positive integer with input going up to 10 digits long.
 
 <div markdown="block" class="alert alert-info">
 
@@ -574,20 +574,20 @@ company.
 </div>
 
 <div markdown="block" class="alert alert-info">
-
-:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
-
-</div>
-
-<div markdown="block" class="alert alert-info">
    
 :information_source: Roles in a Company are listed based on the order in which they are added to the Company.
    
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
+
+</div>
+
 <div markdown="block" class="alert alert-danger">
 
-:warning: When round brackets are used, they must be in pairs.
+:warning: When round brackets are used, they must be in pairs and at the end of the role name.
 
 </div>
 

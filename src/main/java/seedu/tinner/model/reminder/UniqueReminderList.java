@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.TreeSet;
 
 import javafx.collections.FXCollections;
@@ -154,17 +153,4 @@ public class UniqueReminderList implements Iterable<Reminder> {
         return internalList.hashCode();
     }
 
-    /**
-     * Returns true if {@code Reminders} contains only unique companies.
-     */
-    private boolean remindersAreUnique(List<Reminder> reminders) {
-        for (int i = 0; i < reminders.size() - 1; i++) {
-            for (int j = i + 1; j < reminders.size(); j++) {
-                if (reminders.get(i).isSameReminder(reminders.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
