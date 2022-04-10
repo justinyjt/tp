@@ -51,6 +51,7 @@ Given below are my contributions to the project.
     * Added documentation for the command summary (Pull request [\#24](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/24))
     * Cleaned up documentation by fixing typos, formatting, and screenshots (Pull request [\#101](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/101))
     * Updated purpose of UG and features (Pull request [\#203](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/203))
+    * Unified all screenshots for aesthetics (Pull requests [\#306](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/306), [\#308](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/308))
   * Developer Guide:
     * Updated target user profile section (Pull request [\#23](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/23))
     * Converted documentation from `.docx` to `.md` (Pull request [\#23](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/23))

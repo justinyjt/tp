@@ -61,7 +61,10 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 RoleListPanel --|> UiPart
 RoleCard --|> UiPart
+ReminderDateListPanel --|> UiPart
 ReminderDateCard --|> UiPart
+ReminderListPanel --|> UiPart
+ReminderDateListPanel -[hidden]-|> UiPart
 ReminderCard --|> UiPart
 
 CompanyCard ..> Model

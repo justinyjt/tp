@@ -98,7 +98,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code CompanyName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
@@ -110,6 +110,24 @@ public class ParserUtil {
             throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
         }
         return new CompanyName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Primarily used for validity check for {@code CompanyName}.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseNameReturnString(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!CompanyName.isValidName(trimmedName)) {
+            if (!trimmedName.isEmpty()) {
+                throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return trimmedName;
     }
 
     /**
@@ -171,6 +189,25 @@ public class ParserUtil {
         }
         return new RoleName(trimmedRoleName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Primarily used for validity check for {@code RoleName}.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseRoleNameReturnString(String roleName) throws ParseException {
+        requireNonNull(roleName);
+        String trimmedRoleName = roleName.trim();
+        if (!RoleName.isValidName(trimmedRoleName)) {
+            if (!trimmedRoleName.isEmpty()) {
+                throw new ParseException(RoleName.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return trimmedRoleName;
+    }
+
 
     /**
      * Parses a {@code String status} into a {@code Status}.

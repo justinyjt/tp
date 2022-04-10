@@ -40,19 +40,16 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.MESSAGE_USAGE));
         }
 
-        String companyName = argMultimap.getOptionalValue(PREFIX_COMPANY_NAME).get();
-        String roleName = argMultimap.getOptionalValue(PREFIX_ROLE_NAME).get();
+        String companyName = ParserUtil.parseNameReturnString(argMultimap.getOptionalValue(PREFIX_COMPANY_NAME).get());
+        String roleName = ParserUtil.parseRoleNameReturnString(argMultimap.getOptionalValue(PREFIX_ROLE_NAME).get());
 
-        String trimmedCompanyName = companyName.trim();
-        String trimmedRoleName = roleName.trim();
+        String[] roleNameKeywords = roleName.split("\\s+");
+        String[] companyNameKeywords = companyName.split("\\s+");
 
-        String[] roleNameKeywords = trimmedRoleName.split("\\s+");
-        String[] companyNameKeywords = trimmedCompanyName.split("\\s+");
-
-        if (trimmedRoleName.isEmpty()) {
+        if (roleName.isEmpty()) {
             roleNameKeywords = new String[0];
         }
-        if (trimmedCompanyName.isEmpty()) {
+        if (companyName.isEmpty()) {
             companyNameKeywords = new String[0];
         }
 

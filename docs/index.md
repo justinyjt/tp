@@ -6,11 +6,13 @@ title: Tinner
 [![CI Status](https://github.com/AY2122S2-CS2103T-T17-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T17-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T17-1/tp/branch/master/graph/badge.svg?token=HVJ16S6MRB)](https://codecov.io/gh/AY2122S2-CS2103T-T17-1/tp)
 
-Main window  
+Main window
+
 ![Ui](images/Ui.png)
 
-Reminder window   
-![Reminder](images/Reminder.png)
+Reminder window
+
+<img src="images/Reminder.png" alt="Reminder" height="480">
 
 Tinner (Anagram of Intern) is a desktop app for managing internship applications for students, optimized for use via a Command Line Interface (CLI)
 while still having the benefits of a Graphical User Interface (GUI).
