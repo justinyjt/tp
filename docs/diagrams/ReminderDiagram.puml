@@ -60,6 +60,7 @@ deactivate UniqueReminderList
 
 end
 end
+end
 
 create ModelManager
 UniqueReminderList -> ModelManager :ModelManager(ReadOnlyCompanyList, ReadOnlyUserPrefs, ReminderList)
